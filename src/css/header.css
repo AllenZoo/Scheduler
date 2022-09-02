@@ -1,0 +1,55 @@
+#header {
+  display: flex;
+  background-color: white;
+  border-bottom: 1px solid gray;
+  border-radius: 2px;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  padding-left: 10px;
+  z-index: 202;
+}
+
+#header ul {
+  display: flex;
+  padding: 0;
+  column-gap: 10px;
+  align-items: center;
+}
+
+#header ul li {
+  list-style-type: none;
+  padding: 10px 10px 10px 10px;
+  border-radius: 10px;
+  transition: background-color 0.15s;
+}
+
+#header ul li:hover {
+  background-color: black;
+  cursor: pointer;
+}
+
+#header ul li.active {
+  background-color: darkolivegreen;
+  color: white;
+  text-decoration: none;
+}
+
+#header ul li {
+  background-color: gray;
+  color: white;
+  text-decoration: none;
+}
+
+/* .non-active-tab {
+  background-color: gray;
+  color: white;
+  text-decoration: none;
+}
+
+.active-tab {
+  background-color: green;
+  color: white;
+  text-decoration: none;
+} */

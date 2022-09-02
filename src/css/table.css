@@ -1,0 +1,70 @@
+#time-table {
+  position: relative;
+  top: 0px;
+  bottom: 50px;
+  padding-bottom: 20px;
+  padding-right: 60px;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+}
+
+#time-table-dates {
+  display: flex;
+  flex-direction: row;
+  column-gap: 50px;
+  margin-left: 10px;
+  align-items: flex-start;
+  justify-content: space-around;
+  flex: 1;
+}
+
+#time-stamp-bar {
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 22px;
+  min-width: 100px;
+}
+
+#time-stamp-bar,
+.date-container .time-block-container {
+  row-gap: 10px;
+}
+
+.time-block {
+  background-color: cadetblue;
+  width: 110px;
+}
+
+.time-block-empty {
+  background-color: darkgoldenrod;
+  width: 110px;
+}
+
+.time-block-container {
+  margin-top: 57px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+}
+
+.date-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+}
+
+.date-container p {
+  font-weight: bold;
+}

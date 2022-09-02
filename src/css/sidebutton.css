@@ -1,0 +1,88 @@
+#add-commitment-button {
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 15px;
+
+  background-color: rgb(212, 212, 212);
+  color: black;
+
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  width: 110px;
+  height: 110px;
+  border-radius: 55px;
+
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15);
+  border: none;
+
+  text-align: center;
+  vertical-align: middle;
+  word-wrap: normal;
+
+  transition: box-shadow 0.3s, background-color 0.3s;
+
+  z-index: 201;
+}
+
+#add-commitment-button:hover {
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  background-color: rgb(101, 101, 101);
+}
+
+.big-add-sign {
+  line-height: 30px;
+  font-size: 50px;
+}
+
+#add-commitment-form {
+  height: 480px;
+  width: 480px;
+  background-color: blueviolet;
+  position: fixed;
+  border-radius: 20px;
+  right: 50px;
+  bottom: 50px;
+  z-index: 201;
+  padding: 10px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 20px;
+}
+
+#add-commitment-form h1 {
+  text-align: center;
+}
+
+#time-input-hour {
+  text-align: center;
+  width: 50px;
+  margin: 0px 5px 0 5px;
+}
+
+#time-input-minute {
+  margin: 0px 5px 0 5px;
+}
+
+#commitment-input-name {
+  min-width: 100px;
+  text-align: center;
+  max-width: max-content;
+}
+
+#commitment-confirm-button,
+#commitment-cancel-button {
+  background-color: blanchedalmond;
+  margin: 0px 10px 0 0;
+  padding: 10px 20px 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+#commitment-confirm-button:hover,
+#commitment-cancel-button:hover {
+  background-color: rgb(172, 139, 90);
+}

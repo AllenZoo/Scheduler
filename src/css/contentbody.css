@@ -1,0 +1,19 @@
+#content-body {
+  position: fixed;
+  background-color: aquamarine;
+  top: 70px;
+  bottom: 0px;
+  right: 0;
+  left: 0;
+  z-index: 100;
+}
+
+#content-body button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+#content-body button:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,35 @@
+.commitment-display {
+  background-color: chartreuse;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  left: 20px;
+}
+
+.commitment-display div {
+  font-size: 30px;
+}
+
+.commitment-container {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  column-gap: 20px;
+}
+
+.commitment-display-container {
+  position: relative;
+}
+
+.delete-commitment-button {
+  position: absolute;
+  right: -20px;
+  top: 0px;
+  background-color: brown;
+}
+
+.delete-commitment-button:hover {
+  cursor: pointer;
+}
