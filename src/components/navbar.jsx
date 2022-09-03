@@ -9,7 +9,7 @@ class Navbar extends Component {
       <div id="header">
         <ul>
           <CustomLink to="/weeklyoutlook">
-            <li className="active-tab">Weekly Outlook</li>
+            <li>Weekly Outlook</li>
           </CustomLink>
           <CustomLink to="/dayplan">
             <li className="non-active-tab">Day Plan</li>

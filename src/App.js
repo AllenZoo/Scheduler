@@ -8,6 +8,7 @@ import Commitments from "./components/pages/commitments";
 import React, { Component } from "react";
 import Templates from "./components/pages/templates";
 import _ from "lodash";
+import Checklist from "./components/pages/checklist";
 
 class App extends Component {
   state = {
@@ -93,6 +94,8 @@ class App extends Component {
         plan: [],
       },
     ],
+
+    tasks: [],
   };
 
   generateTimesList = () => {
@@ -324,7 +327,15 @@ class App extends Component {
               }
             />
             <Route path="/dayplan" element={<DayPlan></DayPlan>} />
-            <Route path="/checklist" element=""></Route>
+            <Route
+              path="/checklist"
+              element={
+                <Checklist
+                  tasks={this.state.tasks}
+                  commitments={this.state.commitments}
+                ></Checklist>
+              }
+            ></Route>
             <Route path="/goals" element=""></Route>
             <Route
               path="/commitments"

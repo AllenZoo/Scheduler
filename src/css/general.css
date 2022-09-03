@@ -1,5 +1,6 @@
 p,
-div {
+div,
+textarea {
   margin: 0;
   font-family: "Times New Roman", Times, serif;
   font-size: 20px;
@@ -13,7 +14,8 @@ label,
 select,
 option,
 input,
-button {
+button,
+textarea {
   font-size: 20px;
 }
 
@@ -37,4 +39,7 @@ input::-webkit-inner-spin-button {
 body {
   margin-top: 120px;
   padding-bottom: 100px;
+}
+
+textarea {
 }

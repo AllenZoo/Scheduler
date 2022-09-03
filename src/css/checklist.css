@@ -1,0 +1,15 @@
+.checklist-commitment-selection {
+  position: relative;
+}
+
+.checklist-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 10px;
+}
+
+.task-input {
+  height: 100px;
+}

@@ -51,7 +51,7 @@ class Templates extends Component {
               >
                 {this.times.map((time) => (
                   <option key={time} value={time}>
-                    {time}:
+                    {time}
                   </option>
                 ))}
               </select>
