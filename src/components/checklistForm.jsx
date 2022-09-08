@@ -10,14 +10,22 @@ class ChecklistForm extends Component {
 
   commitments = this.props.commitments;
 
-  addChecklistTask = () => {
+  addChecklistTask = (e) => {
+    e.preventDefault();
     let comName = this.comRef.current.value;
     let taskInput = this.taskRef.current.value;
+
+    let task = {
+      commitmentName: comName,
+      taskDescription: taskInput,
+    };
+
+    this.props.addChecklistTask(task);
   };
 
   render() {
     return (
-      <div className="checklist-form">
+      <form className="checklist-form">
         <div>
           <label htmlFor="checklist-commitment-selection">Commitment: </label>
           <select className="checklist-commitment-selection" ref={this.comRef}>
@@ -41,7 +49,7 @@ class ChecklistForm extends Component {
         <div>
           <button onClick={this.addChecklistTask}>Add</button>
         </div>
-      </div>
+      </form>
     );
   }
 }

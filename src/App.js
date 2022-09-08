@@ -186,9 +186,20 @@ class App extends Component {
   };
 
   addCommitment = (commitment) => {
-    const commitments = [...this.state.commitments];
+    let commitments = [...this.state.commitments];
     commitments.push(commitment);
     this.setState({ commitments });
+  };
+
+  addChecklistTask = (task) => {
+    let tasks = [...this.state.tasks];
+    tasks.push(task);
+
+    this.setState({ tasks }, () => {
+      console.log(this.state.tasks);
+      this.forceUpdate();
+      this.setState(this.state);
+    });
   };
 
   generateSchedule = () => {
@@ -333,6 +344,7 @@ class App extends Component {
                 <Checklist
                   tasks={this.state.tasks}
                   commitments={this.state.commitments}
+                  addChecklistTask={this.addChecklistTask}
                 ></Checklist>
               }
             ></Route>

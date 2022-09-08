@@ -13,3 +13,27 @@
 .task-input {
   height: 100px;
 }
+
+.checklist-display {
+  margin-top: 30px;
+  display: flex;
+  align-items: top;
+  justify-content: flex-start;
+
+  flex-direction: row;
+  flex-flow: row wrap;
+}
+
+.checklist-item {
+  padding: 20px;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.checklist-name {
+  font-weight: 700;
+}

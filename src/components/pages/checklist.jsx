@@ -6,14 +6,17 @@ class Checklist extends Component {
   state = {};
 
   commitments = this.props.commitments;
-  tasks = this.props.tasks;
+  //tasks = this.props.tasks;  <- doesn't update along with this.props.tasks
 
   render() {
     return (
       <div>
         <div className="checklist-container">
-          <ChecklistForm commitments={this.commitments}></ChecklistForm>
-          <CheckListDisplay tasks={this.tasks}></CheckListDisplay>
+          <ChecklistForm
+            commitments={this.commitments}
+            addChecklistTask={this.props.addChecklistTask}
+          ></ChecklistForm>
+          <CheckListDisplay tasks={this.props.tasks}></CheckListDisplay>
         </div>
       </div>
     );
