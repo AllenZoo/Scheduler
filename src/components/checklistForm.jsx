@@ -23,6 +23,8 @@ class ChecklistForm extends Component {
     this.props.addChecklistTask(task);
   };
 
+  hideCompletedTasks = () => {};
+
   render() {
     return (
       <form className="checklist-form">
@@ -46,8 +48,13 @@ class ChecklistForm extends Component {
           ref={this.taskRef}
         ></textarea>
 
-        <div>
-          <button onClick={this.addChecklistTask}>Add</button>
+        <div className="checklist-form-button-container">
+          <button id="add-task-button" onClick={this.addChecklistTask}>
+            Add
+          </button>
+          <button id="hide-tasks-button" onClick={this.hideCompletedTasks}>
+            Hide Completed
+          </button>
         </div>
       </form>
     );
