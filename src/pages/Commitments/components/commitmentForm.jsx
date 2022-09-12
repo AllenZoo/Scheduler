@@ -12,6 +12,7 @@ class CommitmentForm extends Component {
     this.timeTypeRef = React.createRef();
     this.inputMinuteRef = React.createRef();
     this.inputHourRef = React.createRef();
+    this.colourRef = React.createRef();
   }
 
   handleSubmit = () => {
@@ -27,6 +28,7 @@ class CommitmentForm extends Component {
       timeType: this.timeTypeRef.current.value,
       hours: this.inputHourRef.current.value,
       minutes: this.inputMinuteRef.current.value,
+      colour: this.colourRef.current.value,
     };
     this.props.handleFormSubmit(commitment);
   };
@@ -105,6 +107,10 @@ class CommitmentForm extends Component {
           </select>
           <p style={{ display: "inline" }}>minutes</p>
         </div>
+        <div>
+          <label htmlFor="colour-picker">Colour: </label>
+          <input type="color" id="colour-picker" ref={this.colourRef}></input>
+        </div>
         <div></div>
         <div>
           <button
@@ -115,7 +121,11 @@ class CommitmentForm extends Component {
           >
             Add
           </button>
-          <button id="commitment-cancel-button" className="shadow-button">
+          <button
+            id="commitment-cancel-button"
+            className="shadow-button"
+            onClick={alert("to be implemented!")}
+          >
             Cancel
           </button>
         </div>

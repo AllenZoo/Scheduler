@@ -20,6 +20,7 @@ class App extends Component {
         timeType: "weekly",
         hours: "5",
         minutes: "30",
+        colour: "red",
       },
       {
         id: 2,
@@ -29,6 +30,7 @@ class App extends Component {
         timeType: "bi-weekly",
         hours: "7",
         minutes: "30",
+        colour: "green",
       },
     ],
 
