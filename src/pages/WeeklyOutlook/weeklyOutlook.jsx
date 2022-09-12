@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import Navbar from "../navbar";
-import TimeTable from "../timetable/timeTable";
+import TimeTable from "../../components/timetable/timeTable";
 import "../../css/weeklyoutlook.css";
 
 class WeeklyOutlook extends Component {
@@ -11,7 +10,10 @@ class WeeklyOutlook extends Component {
         {/* {console.log(this.props.schedule)} */}
         <div id="content-body">
           <div>
-            <button onClick={this.props.generateSchedule}>
+            <button
+              id="schedule-gen-button"
+              onClick={this.props.generateSchedule}
+            >
               Generate Schedule
             </button>
           </div>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import ChecklistItem from "./checkListItem";
+import ChecklistItem from "./checklistItem";
 
-class CheckListDisplay extends Component {
+class ChecklistDisplay extends Component {
   toggleState = (taskId, taskState) => {
     //console.log(e.target.checked);
     this.props.toggleTask(taskId, taskState);
@@ -44,4 +44,4 @@ class CheckListDisplay extends Component {
   }
 }
 
-export default CheckListDisplay;
+export default ChecklistDisplay;

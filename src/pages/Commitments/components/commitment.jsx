@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../../css/general.css";
+import "../../../css/general.css";
 
 class Commitment extends Component {
   state = {};

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import CommitmentForm from "../commitmentForm";
-import Navbar from "../navbar";
-import Commitment from "./commitment";
+import CommitmentForm from "./components/commitmentForm";
+import Commitment from "./components/commitment";
 import "../../css/commitment.css";
 
 class Commitments extends Component {

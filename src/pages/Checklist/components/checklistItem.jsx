@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../css/checklist.css";
+import "../../../css/checklist.css";
 
 class ChecklistItem extends Component {
   // const [checked, setChecked] = useState(false);

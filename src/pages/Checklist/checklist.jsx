@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import CheckListDisplay from "../checklistDisplay";
-import ChecklistForm from "../checklistForm";
+import ChecklistDisplay from "./components/checklistDisplay";
+import ChecklistForm from "./components/checklistForm";
 
 class Checklist extends Component {
   state = {};
@@ -27,11 +27,11 @@ class Checklist extends Component {
             commitments={this.commitments}
             addChecklistTask={this.addTaskToList}
           ></ChecklistForm>
-          <CheckListDisplay
+          <ChecklistDisplay
             tasks={this.props.tasks}
             completedTasks={this.props.completedTasks}
             toggleTask={this.toggleTask}
-          ></CheckListDisplay>
+          ></ChecklistDisplay>
         </div>
       </div>
     );

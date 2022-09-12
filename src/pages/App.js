@@ -1,14 +1,13 @@
-import logo from "./logo.svg";
-import "./App.css";
-import Navbar from "./components/navbar";
+import "../css/App.css";
+import Navbar from "../components/navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import WeeklyOutlook from "./components/pages/weeklyOutlook";
-import DayPlan from "./components/pages/dayPlan";
-import Commitments from "./components/pages/commitments";
+import WeeklyOutlook from "./WeeklyOutlook/weeklyOutlook";
+import DayPlan from "./DayPlan/dayPlan";
+import Commitments from "./Commitments/commitments";
 import React, { Component } from "react";
-import Templates from "./components/pages/templates";
+import Templates from "./Template/templates";
 import _ from "lodash";
-import Checklist from "./components/pages/checklist";
+import Checklist from "./Checklist/checklist";
 
 class App extends Component {
   state = {
