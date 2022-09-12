@@ -23,7 +23,10 @@ class ChecklistForm extends Component {
     this.props.addChecklistTask(task);
   };
 
-  hideCompletedTasks = () => {};
+  hideCompletedTasks = (e) => {
+    e.preventDefault();
+    alert("todo!");
+  };
 
   render() {
     return (
