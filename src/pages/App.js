@@ -8,6 +8,7 @@ import React, { Component } from "react";
 import Templates from "./Template/templates";
 import _ from "lodash";
 import Checklist from "./Checklist/checklist";
+import Goals from "./Goals/goals";
 
 class App extends Component {
   state = {
@@ -379,7 +380,10 @@ class App extends Component {
                 ></Checklist>
               }
             ></Route>
-            <Route path="/goals" element=""></Route>
+            <Route
+              path="/goals"
+              element={<Goals commitments={this.state.commitments}></Goals>}
+            ></Route>
             <Route
               path="/commitments"
               element={
