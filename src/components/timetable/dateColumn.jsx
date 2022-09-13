@@ -14,7 +14,7 @@ class DateColumn extends Component {
 
         <div className="time-block-container">
           {Array.from(this.props.data.plan).map(function (map) {
-            if (map[1] === "") {
+            if (map[1].name === "") {
               return (
                 <div key={map[0]} className="time-block-empty">
                   _
@@ -22,8 +22,12 @@ class DateColumn extends Component {
               );
             } else {
               return (
-                <div key={map[0]} className="time-block">
-                  {map[1]}
+                <div
+                  key={map[0].name}
+                  className="time-block"
+                  style={{ backgroundColor: map[1].colour }}
+                >
+                  {map[1].name}
                 </div>
               );
             }

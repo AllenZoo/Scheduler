@@ -121,11 +121,7 @@ class CommitmentForm extends Component {
           >
             Add
           </button>
-          <button
-            id="commitment-cancel-button"
-            className="shadow-button"
-            onClick={alert("to be implemented!")}
-          >
+          <button id="commitment-cancel-button" className="shadow-button">
             Cancel
           </button>
         </div>

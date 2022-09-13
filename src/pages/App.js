@@ -124,36 +124,32 @@ class App extends Component {
 
   generateEmptyPlan = () => {
     let map = new Map();
-    this.times.map((time) => map.set(time, ""));
+    let slot = { name: "", colour: "pink" };
+    this.times.map((time) => map.set(time, slot));
     return map;
   };
 
   generateTestPlan = () => {
     let map = this.generateEmptyPlan();
-    map.set("9:30AM", "Appointment");
-    map.set("10:00AM", "CS213");
-    map.set("10:30AM", "CS213");
-    map.set("11:00AM", "Exercise");
-    map.set("11:30AM", "Lunch");
+    map.set("9:30AM", { name: "Appointment", colour: "lightgreen" });
+    map.set("10:00AM", { name: "CS213", colour: "cadetblue" });
+    map.set("10:30AM", { name: "CS213", colour: "cadetblue" });
+    map.set("11:00AM", { name: "Exercise", colour: "orange" });
+    map.set("11:30AM", { name: "Lunch", colour: "yellow" });
     return map;
   };
 
-  addToPlanTemplate = (day, name, timeStart, timeEnd) => {
+  addToPlanTemplate = (plan) => {
     let template = [...this.state.template];
 
-    // let day = this.dayRef.current.value;
-    // let name = this.nameRef.current.value;
-    // let timeStart = this.timeStartRef.current.value;
-    // let timeEnd = this.timeEndRef.current.value;
-
-    let tsIndex = this.times.indexOf(timeStart);
-    let teIndex = this.times.indexOf(timeEnd);
+    let tsIndex = this.times.indexOf(plan.timeStart);
+    let teIndex = this.times.indexOf(plan.timeEnd);
 
     // Get index of schedule to change plan
     let index = 0;
     let planIndex = -1;
     template.forEach(function (dateColumn) {
-      if (dateColumn.date === day) {
+      if (dateColumn.date === plan.day) {
         //console.log("found index!");
         planIndex = index;
       } else {
@@ -167,7 +163,8 @@ class App extends Component {
 
     // Get previous plan and then add new time commitments to it.
     let ePlan = template[planIndex].plan;
-    slicedTimes.map((time) => ePlan.set(time, name));
+    let slot = { name: plan.name, colour: plan.colour };
+    slicedTimes.map((time) => ePlan.set(time, slot));
 
     // Define new plan onto schedule
     template[planIndex].plan = ePlan;
