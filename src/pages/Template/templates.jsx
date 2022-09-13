@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TimeTable from "../timetable/timeTable";
+import TimeTable from "../../components/timetable/timeTable";
 import "../../css/template.css";
 
 class Templates extends Component {

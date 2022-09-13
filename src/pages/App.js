@@ -1,14 +1,13 @@
-import logo from "./logo.svg";
-import "./App.css";
-import Navbar from "./components/navbar";
+import "../css/App.css";
+import Navbar from "../components/navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import WeeklyOutlook from "./components/pages/weeklyOutlook";
-import DayPlan from "./components/pages/dayPlan";
-import Commitments from "./components/pages/commitments";
+import WeeklyOutlook from "./WeeklyOutlook/weeklyOutlook";
+import DayPlan from "./DayPlan/dayPlan";
+import Commitments from "./Commitments/commitments";
 import React, { Component } from "react";
-import Templates from "./components/pages/templates";
+import Templates from "./Template/templates";
 import _ from "lodash";
-import Checklist from "./components/pages/checklist";
+import Checklist from "./Checklist/checklist";
 
 class App extends Component {
   state = {
@@ -21,6 +20,7 @@ class App extends Component {
         timeType: "weekly",
         hours: "5",
         minutes: "30",
+        colour: "red",
       },
       {
         id: 2,
@@ -30,6 +30,7 @@ class App extends Component {
         timeType: "bi-weekly",
         hours: "7",
         minutes: "30",
+        colour: "green",
       },
     ],
 
@@ -95,7 +96,8 @@ class App extends Component {
       },
     ],
 
-    tasks: [],
+    tasks: [{ commitmentName: "cs221", taskDescription: "hi there", id: 2 }],
+    completedTasks: [],
   };
 
   generateTimesList = () => {
@@ -200,6 +202,36 @@ class App extends Component {
       this.forceUpdate();
       this.setState(this.state);
     });
+  };
+
+  toggleTask = (taskId, taskState) => {
+    //console.log("the task we toggling has task id: " + taskId);
+    let tasks = [...this.state.tasks];
+    let completedTasks = [...this.state.completedTasks];
+    if (taskState) {
+      // checkbox was just toggled on - remove task from tasks and add to completed tasks
+      let task = tasks.find((task) => {
+        return task.id === taskId;
+      });
+      tasks = tasks.filter((task) => {
+        return task.id !== taskId;
+      });
+      completedTasks.push(task);
+    } else {
+      // checkbox was just toggled off - remove task from completed tasks and add to tasks
+      let task = completedTasks.find((task) => {
+        return task.id === taskId;
+      });
+      completedTasks = completedTasks.filter((task) => {
+        return task.id !== taskId;
+      });
+      tasks.push(task);
+    }
+
+    this.setState({ completedTasks }, () => {
+      console.log(this.state.completedTasks);
+    });
+    this.setState({ tasks });
   };
 
   generateSchedule = () => {
@@ -343,8 +375,10 @@ class App extends Component {
               element={
                 <Checklist
                   tasks={this.state.tasks}
+                  completedTasks={this.state.completedTasks}
                   commitments={this.state.commitments}
                   addChecklistTask={this.addChecklistTask}
+                  toggleTask={this.toggleTask}
                 ></Checklist>
               }
             ></Route>

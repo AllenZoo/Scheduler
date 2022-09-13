@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../../css/general.css";
+import "../../../css/general.css";
 
 class Commitment extends Component {
   state = {};
@@ -13,7 +13,10 @@ class Commitment extends Component {
 
     return (
       <div className="commitment-display-container">
-        <div className="commitment-display">
+        <div
+          className="commitment-display"
+          style={{ backgroundColor: commitment.colour }}
+        >
           <div>
             <strong>{commitment.name}</strong>
           </div>
