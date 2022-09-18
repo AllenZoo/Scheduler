@@ -26,6 +26,9 @@ class Navbar extends Component {
           <CustomLink to="/templates">
             <li className="non-active-tab">Templates</li>
           </CustomLink>
+          <CustomLink to="/data">
+            <li className="non-active-tab">Data</li>
+          </CustomLink>
         </ul>
       </div>
     );

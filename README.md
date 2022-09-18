@@ -1,3 +1,13 @@
+# How to run Scheduler
+
+1. To start the app, access the project root directory (eg. ../../Scheduler) with the terminal and run the following:
+
+- npm start
+
+2. To start up express server, access the server file (eg. ../../Scheduler/server) and run the following:
+
+- node server.js
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

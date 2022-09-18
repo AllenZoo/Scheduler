@@ -9,6 +9,9 @@ import Templates from "./Template/templates";
 import _ from "lodash";
 import Checklist from "./Checklist/checklist";
 import Goals from "./Goals/goals";
+import Axios from "axios";
+import Data from "./Data/data";
+import axios from "axios";
 
 class App extends Component {
   state = {
@@ -341,6 +344,12 @@ class App extends Component {
     return inputList;
   };
 
+  saveData = () => {
+    Axios.post("");
+  };
+
+  loadData = () => {};
+
   componentDidMount() {
     let schedule = [...this.state.schedule];
     schedule.map((date) => (date.plan = this.generateTestPlan()));
@@ -402,9 +411,18 @@ class App extends Component {
                   times={this.times}
                   handleAddToPlan={this.addToPlanTemplate}
                   handleClearTemplate={this.handleClearTemplate}
-                ></Templates>
+                />
               }
-            ></Route>
+            />
+            <Route
+              path="/data"
+              element={
+                <Data
+                  handleSave={this.saveData}
+                  handleLoad={this.loadData}
+                ></Data>
+              }
+            />
           </Routes>
         </Router>
       </div>
