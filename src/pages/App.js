@@ -345,7 +345,21 @@ class App extends Component {
   };
 
   saveData = () => {
-    Axios.post("");
+    const jsonCommitments = JSON.stringify(this.state.commitments);
+    const jsonSchedule = JSON.stringify(this.state.schedule);
+    const jsonTemplate = JSON.stringify(this.state.template);
+    const jsonTasks = JSON.stringify(this.state.tasks);
+    const jsonCTasks = JSON.stringify(this.state.completedTasks);
+
+    Axios.post("http://localhost:3001/save", {
+      jsonCommitments: jsonCommitments,
+      jsonSchedule: jsonSchedule,
+      jsonTemplate: jsonTemplate,
+      jsonTasks: jsonTasks,
+      jsonCTasks: jsonCTasks,
+    }).then(() => {
+      console.log("success");
+    });
   };
 
   loadData = () => {};
