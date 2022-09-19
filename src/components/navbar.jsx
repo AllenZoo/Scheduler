@@ -8,27 +8,13 @@ class Navbar extends Component {
     return (
       <div id="header">
         <ul>
-          <CustomLink to="/weeklyoutlook">
-            <li>Weekly Outlook</li>
-          </CustomLink>
-          <CustomLink to="/dayplan">
-            <li className="non-active-tab">Day Plan</li>
-          </CustomLink>
-          <CustomLink to="/checklist">
-            <li className="non-active-tab">Checklist</li>
-          </CustomLink>
-          <CustomLink to="/goals">
-            <li className="non-active-tab">Goals</li>
-          </CustomLink>
-          <CustomLink to="/commitments">
-            <li className="non-active-tab">Commitments</li>
-          </CustomLink>
-          <CustomLink to="/templates">
-            <li className="non-active-tab">Templates</li>
-          </CustomLink>
-          <CustomLink to="/data">
-            <li className="non-active-tab">Data</li>
-          </CustomLink>
+          <CustomLink to="/weeklyoutlook">Weekly Outlook</CustomLink>
+          <CustomLink to="/dayplan">Day Plan</CustomLink>
+          <CustomLink to="/checklist">Checklist</CustomLink>
+          <CustomLink to="/goals">Goals</CustomLink>
+          <CustomLink to="/commitments">Commitments</CustomLink>
+          <CustomLink to="/templates">Templates</CustomLink>
+          <CustomLink to="/data">Data</CustomLink>
         </ul>
       </div>
     );
@@ -40,7 +26,7 @@ function CustomLink({ to, children, ...props }) {
   const isActive = useMatch({ path: resolvedPath.pathname, end: true });
 
   return (
-    <li className={isActive ? "active" : ""}>
+    <li className={isActive ? "active-tab" : "non-active-tab"}>
       <Link to={to} {...props}>
         {children}
       </Link>

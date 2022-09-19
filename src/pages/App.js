@@ -15,6 +15,7 @@ import axios from "axios";
 
 class App extends Component {
   state = {
+    user: "",
     commitments: [
       {
         id: 1,
@@ -344,7 +345,7 @@ class App extends Component {
     return inputList;
   };
 
-  saveData = () => {
+  saveData = (user) => {
     const jsonCommitments = JSON.stringify(this.state.commitments);
     const jsonSchedule = JSON.stringify(this.state.schedule);
     const jsonTemplate = JSON.stringify(this.state.template);
@@ -352,13 +353,14 @@ class App extends Component {
     const jsonCTasks = JSON.stringify(this.state.completedTasks);
 
     Axios.post("http://localhost:3001/save", {
+      user: user,
       jsonCommitments: jsonCommitments,
       jsonSchedule: jsonSchedule,
       jsonTemplate: jsonTemplate,
       jsonTasks: jsonTasks,
       jsonCTasks: jsonCTasks,
     }).then(() => {
-      console.log("success");
+      console.log("success, saved to " + user);
     });
   };
 
@@ -432,6 +434,7 @@ class App extends Component {
               path="/data"
               element={
                 <Data
+                  user={this.state.user}
                   handleSave={this.saveData}
                   handleLoad={this.loadData}
                 ></Data>

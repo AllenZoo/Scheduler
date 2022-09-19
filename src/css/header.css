@@ -20,36 +20,29 @@
 
 #header ul li {
   list-style-type: none;
-  padding: 10px 10px 10px 10px;
+  padding: 15px 10px 15px 10px;
   border-radius: 10px;
   transition: background-color 0.15s;
 }
 
-#header ul li:hover {
+#header ul li.non-active-tab:hover {
   background-color: black;
   cursor: pointer;
 }
 
-#header ul li.active {
+#header ul li.active-tab {
   background-color: darkolivegreen;
   color: white;
   text-decoration: none;
 }
 
-#header ul li {
+#header ul li.non-active-tab {
   background-color: gray;
   color: white;
   text-decoration: none;
 }
 
-/* .non-active-tab {
-  background-color: gray;
+#header ul a {
   color: white;
-  text-decoration: none;
+  padding: 15px 5px 15px 5px;
 }
-
-.active-tab {
-  background-color: green;
-  color: white;
-  text-decoration: none;
-} */

@@ -38,6 +38,7 @@ app.post("/test", (req, res) => {
 });
 
 app.post("/save", (req, res) => {
+  const user = req.body.user;
   const jsonCommitments = req.body.jsonCommitments;
   const jsonSchedule = req.body.jsonSchedule;
   const jsonTemplate = req.body.jsonTemplate;
@@ -45,11 +46,11 @@ app.post("/save", (req, res) => {
   const jsonCTasks = req.body.jsonCTasks;
 
   const query =
-    "INSERT INTO schedules (commitments, schedule, template, tasks, completed_tasks) VALUES (?, ?, ?, ?, ?)";
+    "INSERT INTO schedules (user, commitments, schedule, template, tasks, completed_tasks) VALUES (?, ?, ?, ?, ?, ?)";
 
   db.query(
     query,
-    [jsonCommitments, jsonSchedule, jsonTemplate, jsonTasks, jsonCTasks],
+    [user, jsonCommitments, jsonSchedule, jsonTemplate, jsonTasks, jsonCTasks],
     (err, result) => {
       if (err) {
         console.log(err);
