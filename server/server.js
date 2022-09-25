@@ -10,10 +10,10 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  user: "admin",
+  user: "root",
   host: "localhost",
   password: "12345678",
-  database: "test",
+  database: "scheduler",
 });
 
 app.get("/test", (req, res) => {
@@ -31,12 +31,6 @@ app.get("/", (req, res) => {
   res.send("hello world");
 });
 
-app.post("/test", (req, res) => {
-  //const value = req.body.value;
-  const query = "INSERT INTO testtable (number) VALUES (8)";
-  db.query(query);
-});
-
 app.post("/save", (req, res) => {
   const user = req.body.user;
   const jsonCommitments = req.body.jsonCommitments;
@@ -45,6 +39,7 @@ app.post("/save", (req, res) => {
   const jsonTasks = req.body.jsonTasks;
   const jsonCTasks = req.body.jsonCTasks;
 
+  console.log(user);
   const query =
     "INSERT INTO schedules (user, commitments, schedule, template, tasks, completed_tasks) VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -59,6 +54,25 @@ app.post("/save", (req, res) => {
       }
     }
   );
+});
+
+app.post("/update", (req, res) => {
+  const user = req.body.user;
+  const query =
+    "UPDATE schedules SET commitments = ?, schedule = ?, template = ?, tasks = ?, completed_tasks = ? WHERE user = ?";
+});
+
+app.post("/load", (req, res) => {
+  const user = req.body.user;
+
+  const query = "SELECT * FROM schedules WHERE user = ?";
+  db.query(query, [user], (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
 });
 
 app.listen(PORT, () => {

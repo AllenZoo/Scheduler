@@ -347,11 +347,14 @@ class App extends Component {
 
   saveData = (user) => {
     const jsonCommitments = JSON.stringify(this.state.commitments);
-    const jsonSchedule = JSON.stringify(this.state.schedule);
-    const jsonTemplate = JSON.stringify(this.state.template);
+    const jsonSchedule = JSON.stringify(this.state.schedule, ["date", "plan"]);
+    const jsonTemplate = JSON.stringify(this.state.schedule, ["date", "plan"]);
     const jsonTasks = JSON.stringify(this.state.tasks);
     const jsonCTasks = JSON.stringify(this.state.completedTasks);
 
+    console.log(this.state.template);
+    console.log(this.state.template[0].plan);
+    console.log(jsonTemplate);
     Axios.post("http://localhost:3001/save", {
       user: user,
       jsonCommitments: jsonCommitments,
@@ -361,10 +364,32 @@ class App extends Component {
       jsonCTasks: jsonCTasks,
     }).then(() => {
       console.log("success, saved to " + user);
+      alert("value successfully saved to: " + user);
     });
   };
 
-  loadData = () => {};
+  loadData = (user) => {
+    Axios.post("http://localhost:3001/load", {
+      user: user,
+    }).then((response) => {
+      this.processLoading(response.data);
+    });
+  };
+
+  processLoading = (data) => {
+    let userData = data[0];
+    let schedule = JSON.parse(userData.schedule);
+    let commitments = JSON.parse(userData.commitments);
+    let tasks = JSON.parse(userData.tasks);
+    let completedTasks = JSON.parse(userData.completed_tasks);
+
+    console.log(schedule);
+
+    this.setState({ schedule });
+    this.setState({ commitments });
+    this.setState({ tasks });
+    this.setState({ completedTasks });
+  };
 
   componentDidMount() {
     let schedule = [...this.state.schedule];

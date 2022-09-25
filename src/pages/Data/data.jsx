@@ -10,6 +10,10 @@ class Data extends Component {
     this.props.handleSave(this.userRef.current.value);
   };
 
+  handleLoad = () => {
+    this.props.handleLoad(this.userRef.current.value);
+  };
+
   render() {
     return (
       <div>
@@ -19,7 +23,7 @@ class Data extends Component {
         </div>
 
         <button onClick={this.handleSave}>Save</button>
-        <button onClick={this.props.handleLoad}>Load</button>
+        <button onClick={this.handleLoad}>Load</button>
       </div>
     );
   }
