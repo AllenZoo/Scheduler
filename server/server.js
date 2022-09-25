@@ -39,9 +39,13 @@ app.post("/save", (req, res) => {
   const jsonTasks = req.body.jsonTasks;
   const jsonCTasks = req.body.jsonCTasks;
 
-  console.log(user);
   const query =
-    "INSERT INTO schedules (user, commitments, schedule, template, tasks, completed_tasks) VALUES (?, ?, ?, ?, ?, ?)";
+    "INSERT INTO schedules (user, commitments, schedule, template, tasks, completed_tasks) VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE " +
+    "commitments = VALUES(commitments)," +
+    "schedule = VALUES(schedule)," +
+    "template = VALUES(template)," +
+    "tasks = VALUES(tasks)," +
+    "completed_tasks = VALUES(completed_tasks);";
 
   db.query(
     query,
