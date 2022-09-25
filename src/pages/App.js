@@ -347,14 +347,11 @@ class App extends Component {
 
   saveData = (user) => {
     const jsonCommitments = JSON.stringify(this.state.commitments);
-    const jsonSchedule = JSON.stringify(this.state.schedule, ["date", "plan"]);
-    const jsonTemplate = JSON.stringify(this.state.schedule, ["date", "plan"]);
     const jsonTasks = JSON.stringify(this.state.tasks);
     const jsonCTasks = JSON.stringify(this.state.completedTasks);
+    const jsonSchedule = JSON.stringify(this.state.schedule, this.replacer);
+    const jsonTemplate = JSON.stringify(this.state.template, this.replacer);
 
-    console.log(this.state.template);
-    console.log(this.state.template[0].plan);
-    console.log(jsonTemplate);
     Axios.post("http://localhost:3001/save", {
       user: user,
       jsonCommitments: jsonCommitments,
@@ -378,18 +375,38 @@ class App extends Component {
 
   processLoading = (data) => {
     let userData = data[0];
-    let schedule = JSON.parse(userData.schedule);
     let commitments = JSON.parse(userData.commitments);
     let tasks = JSON.parse(userData.tasks);
     let completedTasks = JSON.parse(userData.completed_tasks);
-
-    console.log(schedule);
+    let schedule = JSON.parse(userData.schedule, this.reviver);
+    let template = JSON.parse(userData.template, this.reviver);
 
     this.setState({ schedule });
+    this.setState({ template });
     this.setState({ commitments });
     this.setState({ tasks });
     this.setState({ completedTasks });
   };
+
+  replacer(key, value) {
+    if (value instanceof Map) {
+      return {
+        dataType: "Map",
+        value: Array.from(value.entries()), // or with spread: value: [...value]
+      };
+    } else {
+      return value;
+    }
+  }
+
+  reviver(key, value) {
+    if (typeof value === "object" && value !== null) {
+      if (value.dataType === "Map") {
+        return new Map(value.value);
+      }
+    }
+    return value;
+  }
 
   componentDidMount() {
     let schedule = [...this.state.schedule];
@@ -398,6 +415,7 @@ class App extends Component {
 
     let template = [...this.state.template];
     template.map((date) => (date.plan = this.generateEmptyPlan()));
+    console.log(template);
     this.setState({ template });
   }
 
