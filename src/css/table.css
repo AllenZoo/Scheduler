@@ -68,3 +68,8 @@
 .date-container p {
   font-weight: bold;
 }
+
+.time-table-header {
+  display: flex;
+  flex-direction: row;
+}
