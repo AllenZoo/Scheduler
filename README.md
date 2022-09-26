@@ -1,3 +1,17 @@
+# Scheduler
+
+A SPA targetting those who want a little switch up to their monotonous schedules by letting RNG decide their fate for the day.
+
+Built using:
+
+Front-end: HTML, CSS, JavaScript, React.js.
+
+Back-end: uses Node.js Express framework, MySQL database.
+
+
+
+
+
 # How to run Scheduler
 
 1. To start the app, access the project root directory (eg. ../../Scheduler) with the terminal and run the following:
