@@ -1,3 +1,27 @@
+# Scheduler
+
+A SPA targetting those who want a little switch up to their monotonous schedules by letting RNG decide their fate for the day.
+
+Functionalities include: 
+
+* A weekly schedule generator.
+* Plan for the day display based off generated schedule (WIP)
+* Goals for hour tracking (WIP)
+* Time commitment lists used for generating schedules.
+* Checklist to keep track of tasks.
+* Saving and loading from a  local database.
+
+
+Built using:
+
+Front-end: HTML, CSS, JavaScript, React.js.
+
+Back-end: uses Node.js Express framework, MySQL database.
+
+
+
+
+
 # How to run Scheduler
 
 1. To start the app, access the project root directory (eg. ../../Scheduler) with the terminal and run the following:
