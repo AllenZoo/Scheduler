@@ -136,7 +136,10 @@ class App extends Component {
 
   generateTestPlan = () => {
     let map = this.generateEmptyPlan();
-    map.set("9:30AM", { name: "Appointment", colour: "lightgreen" });
+    map.set("9:30AM", {
+      name: "Appointment DOUBLE LINE",
+      colour: "lightgreen",
+    });
     map.set("10:00AM", { name: "CS213", colour: "cadetblue" });
     map.set("10:30AM", { name: "CS213", colour: "cadetblue" });
     map.set("11:00AM", { name: "Exercise", colour: "orange" });

@@ -9,7 +9,8 @@
   z-index: 200;
   border: 1px solid black;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  width: 100%;
 }
 
 #time-table-dates {
@@ -69,7 +70,66 @@
   font-weight: bold;
 }
 
+.time-table-header-container {
+  display: flex;
+}
+
+.time-table-header-padding {
+  display: flex;
+  flex: 1;
+}
+
+.time-table-header-day {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
 .time-table-header {
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+  padding-left: 10px;
+  flex: 9;
+}
+
+.time-table-row-container {
+  position: relative;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.time-table-row-time-container {
+  position: relative;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  flex: 1;
+  width: 100%;
+}
+
+.time-table-row-plan-container {
+  padding-left: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 12px;
+  flex: 9;
+}
+
+.time-table-row-plan-slot {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+.time-table-body {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
 }

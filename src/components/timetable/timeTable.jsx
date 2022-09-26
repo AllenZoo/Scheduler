@@ -4,6 +4,8 @@ import TimeBar from "./timebar";
 import "../../css/table.css";
 import "../../css/contentbody.css";
 import TimeTableHeader from "./timeTableHeader";
+import TimeTableBody from "./timeTableBody";
+import TimeTableRow from "./timeTableRow";
 
 class TimeTable extends Component {
   generateTimesList = () => {
@@ -40,8 +42,12 @@ class TimeTable extends Component {
             <DateColumn key={dateColumn.date} data={dateColumn}></DateColumn>
           ))}
         </div> */}
-        <div>
+        <div className="time-table-header-container">
+          <div className="time-table-header-padding"></div>
           <TimeTableHeader data={this.props.schedule}></TimeTableHeader>
+        </div>
+        <div>
+          <TimeTableBody data={this.props.schedule}></TimeTableBody>
         </div>
       </div>
     );

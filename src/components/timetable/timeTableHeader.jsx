@@ -5,7 +5,7 @@ class TimeTableHeader extends Component {
     return (
       <div className="time-table-header">
         {this.props.data.map((date) => {
-          return <div>{date.date}</div>;
+          return <div className="time-table-header-day">{date.date}</div>;
         })}
       </div>
     );
