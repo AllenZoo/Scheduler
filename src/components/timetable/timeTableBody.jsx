@@ -55,7 +55,13 @@ class TimeTableBody extends Component {
             });
 
             if (slots != null) {
-              return <TimeTableRow plan={slots} time={time}></TimeTableRow>;
+              return (
+                <TimeTableRow
+                  plan={slots}
+                  time={time}
+                  key={slots[0] + time}
+                ></TimeTableRow>
+              );
             }
           })
         }

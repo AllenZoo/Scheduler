@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import DateColumn from "./dateColumn";
-import TimeBar from "./timebar";
 import "../../css/table.css";
 import "../../css/contentbody.css";
 import TimeTableHeader from "./timeTableHeader";
 import TimeTableBody from "./timeTableBody";
-import TimeTableRow from "./timeTableRow";
 
 class TimeTable extends Component {
   generateTimesList = () => {

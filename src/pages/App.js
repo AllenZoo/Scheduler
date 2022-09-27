@@ -268,7 +268,7 @@ class App extends Component {
         }
       });
 
-      console.log(plan);
+      //console.log(plan);
     }
 
     function getEmptyTimeBlocks(plan) {
@@ -411,6 +411,26 @@ class App extends Component {
     return value;
   }
 
+  getDayPlan() {
+    //console.log(new Date().toLocaleString("en-us", { weekday: "long" }));
+    let day = new Date().toLocaleString("en-us", { weekday: "long" });
+    // schedule: [
+    //   {
+    //     date: "Monday",
+    //     plan: [],
+    //   },
+    //   {
+    //     date: "Tuesday",
+    //     plan: [],
+    //   },
+    let schedule = _.cloneDeep(schedule);
+    schedule = schedule.filter((date) => {
+      return date.date === day;
+    });
+    console.log(schedule);
+    return schedule;
+  }
+
   componentDidMount() {
     let schedule = [...this.state.schedule];
     schedule.map((date) => (date.plan = this.generateTestPlan()));
@@ -418,8 +438,9 @@ class App extends Component {
 
     let template = [...this.state.template];
     template.map((date) => (date.plan = this.generateEmptyPlan()));
-    console.log(template);
     this.setState({ template });
+
+    console.log(new Date().toLocaleString("en-us", { weekday: "long" }));
   }
 
   render() {
@@ -438,7 +459,11 @@ class App extends Component {
                 ></WeeklyOutlook>
               }
             />
-            <Route path="/dayplan" element={<DayPlan></DayPlan>} />
+
+            <Route
+              path="/dayplan"
+              element={<DayPlan schedule={this.state.schedule}></DayPlan>}
+            />
             <Route
               path="/checklist"
               element={
