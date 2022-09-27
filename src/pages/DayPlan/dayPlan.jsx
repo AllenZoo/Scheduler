@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import TimeTable from "../../components/timetable/timeTable";
+import "../../css/dayPlan.css";
 
 class DayPlan extends Component {
   getDayPlan() {
@@ -27,7 +28,12 @@ class DayPlan extends Component {
   dayPlan = this.getDayPlan();
 
   render() {
-    return <TimeTable schedule={this.dayPlan}></TimeTable>;
+    return (
+      <div className="day-plan-container">
+        <div className="page-title">Day Plan</div>
+        <TimeTable schedule={this.dayPlan}></TimeTable>
+      </div>
+    );
   }
 }
 

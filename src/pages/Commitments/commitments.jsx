@@ -14,7 +14,8 @@ class Commitments extends Component {
 
   render() {
     return (
-      <div>
+      <div className="commitments-page-container">
+        <div className="page-title">Commitments</div>
         <div className="commitment-container">
           {this.props.commitments.map((c) => (
             <Commitment

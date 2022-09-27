@@ -5,7 +5,6 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  left: 20px;
 }
 
 .commitment-display div {
@@ -25,11 +24,16 @@
 
 .delete-commitment-button {
   position: absolute;
-  right: -20px;
+  right: 0px;
   top: 0px;
   background-color: brown;
 }
 
 .delete-commitment-button:hover {
   cursor: pointer;
+}
+
+.commitments-page-container {
+  display: flex;
+  flex-direction: column;
 }

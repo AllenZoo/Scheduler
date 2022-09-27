@@ -6,6 +6,7 @@ class WeeklyOutlook extends Component {
   render() {
     return (
       <div className="weekly-outlook-container">
+        <div className="page-title">Weekly Outlook</div>
         <TimeTable schedule={this.props.schedule}></TimeTable>
         {/* {console.log(this.props.schedule)} */}
         <div id="content-body">

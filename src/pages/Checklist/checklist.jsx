@@ -23,6 +23,7 @@ class Checklist extends Component {
     return (
       <div>
         <div className="checklist-container">
+          <div className="page-title">Todo-List</div>
           <ChecklistForm
             commitments={this.commitments}
             addChecklistTask={this.addTaskToList}

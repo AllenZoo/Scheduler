@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "../../css/data.css";
 
 class Data extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class Data extends Component {
   render() {
     return (
       <div>
+        <div className="page-title">Save or Load Data</div>
         <div>
           <label htmlFor="user-name-input">User: </label>
           <input id="user-name-input" type="text" ref={this.userRef}></input>

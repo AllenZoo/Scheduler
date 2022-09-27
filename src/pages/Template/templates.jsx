@@ -21,6 +21,7 @@ class Templates extends Component {
     return (
       <div>
         <div className="template-container">
+          <div className="page-title">Template</div>
           <TimeTable schedule={this.props.template}></TimeTable>
           <TemplateForm
             times={this.times}
