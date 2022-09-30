@@ -18,8 +18,7 @@ Front-end: HTML, CSS, JavaScript, React.js.
 
 Back-end: uses Node.js Express framework, MySQL database.
 
-
-
+Site URL: [Scheduler](https://allenzoo.github.io/weeklyoutlook)
 
 
 # How to run Scheduler
