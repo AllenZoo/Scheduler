@@ -91,6 +91,11 @@
   width: 100%;
 }
 
+.time-table-row-time-container:nth-child(1) {
+  flex-shrink: 0;
+  flex-basis: 0;
+}
+
 .time-table-row-time-container,
 .time-table-header-padding {
   display: flex;
