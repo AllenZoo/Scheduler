@@ -14,22 +14,25 @@ class Commitments extends Component {
 
   render() {
     return (
-      <div className="commitments-page-container">
-        <div className="page-title">Commitments</div>
-        <div className="commitment-container">
-          {this.props.commitments.map((c) => (
-            <Commitment
-              commitment={c}
-              onDelete={this.props.handleDeleteCommitment}
-              key={c.id}
-            ></Commitment>
-          ))}
-        </div>
+      <div>
+        <div className="commitments-page-container">
+          <div className="page-title">Commitments</div>
+          <div className="commitment-container">
+            {this.props.commitments.map((c) => (
+              <Commitment
+                commitment={c}
+                onDelete={this.props.handleDeleteCommitment}
+                key={c.id}
+              ></Commitment>
+            ))}
+          </div>
 
-        <CommitmentForm
-          commitments={this.props.commitments}
-          handleFormSubmit={this.handleFormSubmit}
-        ></CommitmentForm>
+          <CommitmentForm
+            commitments={this.props.commitments}
+            handleFormSubmit={this.handleFormSubmit}
+          ></CommitmentForm>
+        </div>
+        <div className="commitment-page-background"></div>
       </div>
     );
   }

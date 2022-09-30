@@ -18,14 +18,17 @@ class Data extends Component {
   render() {
     return (
       <div>
-        <div className="page-title">Save or Load Data</div>
-        <div>
-          <label htmlFor="user-name-input">User: </label>
-          <input id="user-name-input" type="text" ref={this.userRef}></input>
-        </div>
+        <div className="data-container">
+          <div className="page-title">Save or Load Data</div>
+          <div>
+            <label htmlFor="user-name-input">User: </label>
+            <input id="user-name-input" type="text" ref={this.userRef}></input>
+          </div>
 
-        <button onClick={this.handleSave}>Save</button>
-        <button onClick={this.handleLoad}>Load</button>
+          <button onClick={this.handleSave}>Save</button>
+          <button onClick={this.handleLoad}>Load</button>
+        </div>
+        <div className="data-page-background"></div>
       </div>
     );
   }

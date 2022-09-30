@@ -1,9 +1,9 @@
-.data-container {
+.goal-container {
   position: relative;
   z-index: 200;
 }
 
-.data-page-background {
+.goal-page-background {
   position: fixed;
   background: #134e5e; /* fallback for old browsers */
   background: -webkit-linear-gradient(

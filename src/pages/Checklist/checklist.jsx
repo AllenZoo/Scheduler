@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ChecklistDisplay from "./components/checklistDisplay";
 import ChecklistForm from "./components/checklistForm";
+import "../../css/checklist.css";
 
 class Checklist extends Component {
   state = {};
@@ -34,6 +35,8 @@ class Checklist extends Component {
             toggleTask={this.toggleTask}
           ></ChecklistDisplay>
         </div>
+
+        <div className="checklist-page-background"></div>
       </div>
     );
   }
