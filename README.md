@@ -35,10 +35,15 @@ Functionalities include:
 ### Screenshots
 
 ![alt text](https://github.com/AllenZoo/Scheduler/blob/master/screenshots/screenshot1.PNG)
+###
 ![alt text](https://github.com/AllenZoo/Scheduler/blob/master/screenshots/screenshot2.PNG)
+###
 ![alt text](https://github.com/AllenZoo/Scheduler/blob/master/screenshots/screenshot3.PNG)
+###
 ![alt text](https://github.com/AllenZoo/Scheduler/blob/master/screenshots/screenshot5.PNG)
+###
 ![alt text](https://github.com/AllenZoo/Scheduler/blob/master/screenshots/screenshot6.PNG)
+###
 ![alt text](https://github.com/AllenZoo/Scheduler/blob/master/screenshots/screenshot7.PNG)
 
 
