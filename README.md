@@ -52,6 +52,11 @@ Back-end: Node.js Express framework, MySQL database.
 ### Useful resources
 
 ## How to run Scheduler
+Install the following (if you haven't already):
+- [Node js](https://nodejs.org/en/download/)
+- [mySQL server](https://dev.mysql.com/downloads/mysql/)
+- [mySQL GUI](https://codingsight.com/10-best-mysql-gui-tools/) -choose from the list (I use [mySQL workbench](https://dev.mysql.com/downloads/workbench/))
+
 
 1. To start the app, access the project root directory (eg. ../../Scheduler) with the terminal and run the following:
 
@@ -61,7 +66,7 @@ Back-end: Node.js Express framework, MySQL database.
 
 - node server.js
 
-3. To enable saving and loading into a databse, install a mySQL database server and client, and edit properties as necessary under server.js files:
+3. To enable saving and loading into a databse, install a mySQL database server and GUI, and edit properties as necessary under server.js files:
 
 ```js
 /* Examples */
