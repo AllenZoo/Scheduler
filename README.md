@@ -56,11 +56,19 @@ Functionalities include:
 ### Built with
 
 Front-end: HTML, CSS, JavaScript, React.js.
+
 Back-end: Node.js Express framework, MySQL database.
 
 ### What I learned
 
+- Using Node.js and connecting to a database.
+- Cool CSS styling with React (navbar) :)
+- Using React Routers to navigate between pages.
+
 ### Continued development
+
+- Currently working on implementing Goals page.
+- Working on improving algorithm for generating schedule.
 
 ### Useful resources
 
@@ -70,6 +78,13 @@ Install the following (if you haven't already):
 - [mySQL server](https://dev.mysql.com/downloads/mysql/)
 - [mySQL GUI](https://codingsight.com/10-best-mysql-gui-tools/) -choose from the list (I use [mySQL workbench](https://dev.mysql.com/downloads/workbench/))
 
+Run the following in project terminal to install some dependencies:
+
+- npm install cors
+- npm install axios
+- npm i lodash
+- npm install react-router
+- and more if prompted by terminal.
 
 1. To start the app, access the project root directory (eg. ../../Scheduler) with the terminal and run the following:
 
