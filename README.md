@@ -26,13 +26,21 @@ A SPA targetting those who want a little switch up to their monotonous schedules
 
 Functionalities include: 
 * A weekly schedule generator.
-* Plan for the day display based off generated schedule (WIP)
+* Plan for the day display based off generated schedule.
 * Goals for hour tracking (WIP)
 * Time commitment lists used for generating schedules.
 * Checklist to keep track of tasks.
 * Saving and loading from a  local database.
 
 ### Screenshots
+
+![alt text](https://github.com/AllenZoo/Scheduler/blob/master/screenshots/screenshot1.PNG)
+![alt text](https://github.com/AllenZoo/Scheduler/blob/master/screenshots/screenshot2.PNG)
+![alt text](https://github.com/AllenZoo/Scheduler/blob/master/screenshots/screenshot3.PNG)
+![alt text](https://github.com/AllenZoo/Scheduler/blob/master/screenshots/screenshot5.PNG)
+![alt text](https://github.com/AllenZoo/Scheduler/blob/master/screenshots/screenshot6.PNG)
+![alt text](https://github.com/AllenZoo/Scheduler/blob/master/screenshots/screenshot7.PNG)
+
 
 ### Links
 - Live Site URL: [Scheduler](https://allenzoo.github.io/Scheduler/)
@@ -82,7 +90,7 @@ const db = mysql.createConnection({
 
 For reference: 
 
-![alt text](https://github.com/AllenZoo/Scheduler/blob/master/Table.PNG)
+![alt text](https://github.com/AllenZoo/Scheduler/blob/master/screenshots/Table.PNG)
 
 To create a unique key (for user) reference [this](https://stackoverflow.com/questions/11376413/creating-unique-constraint-on-multiple-columns-in-mysql-workbench-eer-diagram) if you're using mySQL workbench. Otherwise google: "how to make unique key mysql".
 
