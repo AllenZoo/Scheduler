@@ -17,7 +17,7 @@ A SPA targetting those who want a little switch up to their monotonous schedules
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
-- [Installation](#installation)
+- [Installation](#how-to-run-scheduler)
 - [Author](#author)
 
 ## Overview
@@ -78,9 +78,31 @@ const db = mysql.createConnection({
 });
 ```
 
-4.
+4. Create a table in your mySQL GUI.
+
+For reference: 
+
+![alt text](https://github.com/AllenZoo/Scheduler/blob/master/Table.PNG)
+
+To create a unique key (for user) reference [this](https://stackoverflow.com/questions/11376413/creating-unique-constraint-on-multiple-columns-in-mysql-workbench-eer-diagram) if you're using mySQL workbench. Otherwise google: "how to make unique key mysql".
+
+5. Change table name variable in server.js
+```js
+/* CHANGE THIS TO MATCH YOUR TABLE NAME*/
+let table = "schedules";
+
+/* For reference to find table variable above */
+const db = mysql.createConnection({
+  user: "root",
+  host: "localhost",
+  password: "12345678",
+  database: "scheduler",
+});
+```
 
 ## Author
+
+[@AllenZoo](https://github.com/AllenZoo)
 
 
 
