@@ -9,6 +9,8 @@ const PORT = 3001;
 app.use(cors());
 app.use(express.json());
 
+let table = "schedules";
+
 const db = mysql.createConnection({
   user: "root",
   host: "localhost",
@@ -40,7 +42,9 @@ app.post("/save", (req, res) => {
   const jsonCTasks = req.body.jsonCTasks;
 
   const query =
-    "INSERT INTO schedules (user, commitments, schedule, template, tasks, completed_tasks) VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE " +
+    "INSERT INTO " +
+    table +
+    " (user, commitments, schedule, template, tasks, completed_tasks) VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE " +
     "commitments = VALUES(commitments)," +
     "schedule = VALUES(schedule)," +
     "template = VALUES(template)," +
@@ -63,13 +67,15 @@ app.post("/save", (req, res) => {
 app.post("/update", (req, res) => {
   const user = req.body.user;
   const query =
-    "UPDATE schedules SET commitments = ?, schedule = ?, template = ?, tasks = ?, completed_tasks = ? WHERE user = ?";
+    "UPDATE " +
+    table +
+    " SET commitments = ?, schedule = ?, template = ?, tasks = ?, completed_tasks = ? WHERE user = ?";
 });
 
 app.post("/load", (req, res) => {
   const user = req.body.user;
 
-  const query = "SELECT * FROM schedules WHERE user = ?";
+  const query = "SELECT * FROM " + table + " WHERE user = ?";
   db.query(query, [user], (err, result) => {
     if (err) {
       console.log(err);

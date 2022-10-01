@@ -11,12 +11,12 @@ class WeeklyOutlook extends Component {
         {/* {console.log(this.props.schedule)} */}
         <div id="content-body">
           <div>
-            <button
+            {/* <button
               id="schedule-gen-button"
               onClick={this.props.generateSchedule}
             >
               Generate Schedule
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
