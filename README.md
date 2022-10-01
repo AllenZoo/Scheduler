@@ -1,9 +1,30 @@
-# Scheduler
+## Scheduler
 
 A SPA targetting those who want a little switch up to their monotonous schedules by letting RNG decide their fate for the day.
 
-Functionalities include: 
 
+
+
+
+## Table of contents
+
+- [Overview](#overview)
+  - [Functionality](#functionality)
+  - [Screenshot](#screenshots)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+  - [Useful resources](#useful-resources)
+- [Installation](#installation)
+- [Author](#author)
+
+## Overview
+
+### Functionality
+
+Functionalities include: 
 * A weekly schedule generator.
 * Plan for the day display based off generated schedule (WIP)
 * Goals for hour tracking (WIP)
@@ -11,17 +32,26 @@ Functionalities include:
 * Checklist to keep track of tasks.
 * Saving and loading from a  local database.
 
+### Screenshots
 
-Built using:
+### Links
+- Live Site URL: [Scheduler](https://allenzoo.github.io/Scheduler/)
+
+
+## My process
+
+### Built with
 
 Front-end: HTML, CSS, JavaScript, React.js.
+Back-end: Node.js Express framework, MySQL database.
 
-Back-end: uses Node.js Express framework, MySQL database.
+### What I learned
 
-Site URL: [Scheduler](https://allenzoo.github.io/Scheduler/)
+### Continued development
 
+### Useful resources
 
-# How to run Scheduler
+## How to run Scheduler
 
 1. To start the app, access the project root directory (eg. ../../Scheduler) with the terminal and run the following:
 
@@ -30,6 +60,31 @@ Site URL: [Scheduler](https://allenzoo.github.io/Scheduler/)
 2. To start up express server, access the server file (eg. ../../Scheduler/server) and run the following:
 
 - node server.js
+
+3. To enable saving and loading into a databse, install a mySQL database server and client, and edit properties as necessary under server.js files:
+
+```js
+/* Examples */
+const db = mysql.createConnection({
+  user: "root",
+  host: "localhost",
+  password: "12345678",
+  database: "scheduler",
+});
+```
+
+4.
+
+## Author
+
+
+
+
+
+
+
+
+
 
 # Getting Started with Create React App
 
