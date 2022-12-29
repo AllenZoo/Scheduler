@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import TimeTableRow from "./timeTableRow";
 
-class TimeTableBody extends Component {
-  generateTimesList = () => {
+function TimeTableBody(props) {
+  const generateTimesList = () => {
     //credit to: Nicholas Tower & Harpreet
     var x = 30; //minutes interval
     var times = []; // time array
@@ -23,49 +23,36 @@ class TimeTableBody extends Component {
 
     return times;
   };
-  times = this.generateTimesList();
+  const times = generateTimesList();
 
-  componentDidUpdate() {}
+  return (
+    <div className="time-table-body">
+      {
+        // iterates through the times of lists
+        times.map((time) => {
+          let slots = [];
 
-  //   schedule: [
-  //     {
-  //       date: "Monday",
-  //       plan: [],
-  //     },
-  //     {
-  //       date: "Tuesday",
-  //       plan: [],
-  //     },
-
-  render() {
-    return (
-      <div className="time-table-body">
-        {
-          // iterates through the times of lists
-          this.times.map((time) => {
-            let slots = [];
-
-            //loops through each day and pushes activity of that day at time to array.
-            this.props.data.map((date) => {
-              // checks if data has be loaded yet.
-              if (date.plan.size > 0) {
-                // adds data to slots.
-                slots.push(date.plan.get(time));
-              }
-            });
-
-            if (slots != null) {
-              return (
-                <TimeTableRow
-                  plan={slots}
-                  time={time}
-                  key={slots[0] + time}
-                ></TimeTableRow>
-              );
+          //loops through each day and pushes activity of that day at time to array.
+          props.data.map((date) => {
+            // checks if data has be loaded yet.
+            if (date.plan.size > 0) {
+              // adds data to slots.
+              slots.push(date.plan.get(time));
             }
-          })
-        }
-        {/* {this.props.data.map((data) => {
+          });
+
+          if (slots != null) {
+            return (
+              <TimeTableRow
+                plan={slots}
+                time={time}
+                key={slots[0] + time}
+              ></TimeTableRow>
+            );
+          }
+        })
+      }
+      {/* {props.data.map((data) => {
           if (data.plan.size > 0) {
             data.plan.forEach((value, key) => {
               // key is time (eg. 8:00AM), value is slot object {name:'', colour: "green"}
@@ -78,9 +65,8 @@ class TimeTableBody extends Component {
         //data.plan.map((slot) => {}); //{" "}
         <TimeTableRow time={data.plan[0]} data={data.plan[1]}></TimeTableRow>;
         })} */}
-      </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default TimeTableBody;

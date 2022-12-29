@@ -3,22 +3,20 @@ import "../css/header.css";
 import "../css/general.css";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 
-class Navbar extends Component {
-  render() {
-    return (
-      <div id="header">
-        <ul>
-          <CustomLink to="/weeklyoutlook">Weekly Outlook</CustomLink>
-          <CustomLink to="/dayplan">Day Plan</CustomLink>
-          <CustomLink to="/checklist">Checklist</CustomLink>
-          <CustomLink to="/goals">Goals</CustomLink>
-          <CustomLink to="/commitments">Commitments</CustomLink>
-          <CustomLink to="/templates">Templates</CustomLink>
-          <CustomLink to="/data">Data</CustomLink>
-        </ul>
-      </div>
-    );
-  }
+function Navbar() {
+  return (
+    <div id="header">
+      <ul>
+        <CustomLink to="/weeklyoutlook">Weekly Outlook</CustomLink>
+        <CustomLink to="/dayplan">Day Plan</CustomLink>
+        <CustomLink to="/checklist">Checklist</CustomLink>
+        <CustomLink to="/goals">Goals</CustomLink>
+        <CustomLink to="/commitments">Commitments</CustomLink>
+        <CustomLink to="/templates">Templates</CustomLink>
+        <CustomLink to="/data">Data</CustomLink>
+      </ul>
+    </div>
+  );
 }
 
 function CustomLink({ to, children, ...props }) {

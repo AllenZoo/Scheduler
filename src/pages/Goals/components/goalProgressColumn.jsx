@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-class GoalProgressColumn extends Component {
-
-  render() { 
-    <div></div>
-  }
+function GoalProgressColumn() {
+  return <div></div>;
 }
- 
+
 export default GoalProgressColumn;

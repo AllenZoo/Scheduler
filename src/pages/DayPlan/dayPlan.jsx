@@ -3,11 +3,11 @@ import _ from "lodash";
 import TimeTable from "../../components/timetable/timeTable";
 import "../../css/dayPlan.css";
 
-class DayPlan extends Component {
-  getDayPlan() {
+function DayPlan(props) {
+  function getDayPlan() {
     let day = new Date().toLocaleString("en-us", { weekday: "long" });
-    if (this.props.schedule != null) {
-      let schedule = _.cloneDeep(this.props.schedule);
+    if (props.schedule != null) {
+      let schedule = _.cloneDeep(props.schedule);
       schedule = schedule.filter((date) => {
         return date.date === day;
       });
@@ -16,20 +16,18 @@ class DayPlan extends Component {
     }
   }
 
-  dayPlan = this.getDayPlan();
+  const dayPlan = getDayPlan();
 
-  render() {
-    return (
-      <div>
-        <div className="day-plan-container">
-          <div className="page-title">Day Plan</div>
-          <TimeTable schedule={this.dayPlan}></TimeTable>
-        </div>
-
-        <div className="dayplan-page-background"></div>
+  return (
+    <div>
+      <div className="day-plan-container">
+        <div className="page-title">Day Plan</div>
+        <TimeTable schedule={dayPlan}></TimeTable>
       </div>
-    );
-  }
+
+      <div className="dayplan-page-background"></div>
+    </div>
+  );
 }
 
 export default DayPlan;

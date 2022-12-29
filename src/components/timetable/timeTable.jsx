@@ -4,8 +4,8 @@ import "../../css/contentbody.css";
 import TimeTableHeader from "./timeTableHeader";
 import TimeTableBody from "./timeTableBody";
 
-class TimeTable extends Component {
-  generateTimesList = () => {
+function TimeTable(props) {
+  const generateTimesList = () => {
     //credit to: Nicholas Tower & Harpreet
     var x = 30; //minutes interval
     var times = []; // time array
@@ -26,12 +26,11 @@ class TimeTable extends Component {
 
     return times;
   };
-  times = this.generateTimesList();
 
-  render() {
-    return (
-      <div id="time-table">
-        {/* <div id="time-stamp-bar">
+  const times = generateTimesList();
+  return (
+    <div id="time-table">
+      {/* <div id="time-stamp-bar">
           <TimeBar></TimeBar>
         </div>
         <div id="time-table-dates">
@@ -39,16 +38,15 @@ class TimeTable extends Component {
             <DateColumn key={dateColumn.date} data={dateColumn}></DateColumn>
           ))}
         </div> */}
-        <div className="time-table-header-container">
-          <div className="time-table-header-padding"></div>
-          <TimeTableHeader data={this.props.schedule}></TimeTableHeader>
-        </div>
-        <div>
-          <TimeTableBody data={this.props.schedule}></TimeTableBody>
-        </div>
+      <div className="time-table-header-container">
+        <div className="time-table-header-padding"></div>
+        <TimeTableHeader data={props.schedule}></TimeTableHeader>
       </div>
-    );
-  }
+      <div>
+        <TimeTableBody data={props.schedule}></TimeTableBody>
+      </div>
+    </div>
+  );
 }
 
 export default TimeTable;
