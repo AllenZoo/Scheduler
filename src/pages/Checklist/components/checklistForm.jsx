@@ -1,67 +1,63 @@
-import React, { Component } from "react";
+import React from "react";
+import { useRef } from "react";
 import "../../../css/checklist.css";
 
-class ChecklistForm extends Component {
-  constructor(props) {
-    super(props);
-    this.comRef = React.createRef();
-    this.taskRef = React.createRef();
-  }
+function ChecklistForm(props) {
+  const comRef = useRef();
+  const taskRef = useRef();
 
-  commitments = this.props.commitments;
+  const commitments = props.commitments;
 
-  addChecklistTask = (e) => {
+  const addChecklistTask = (e) => {
     e.preventDefault();
-    let comName = this.comRef.current.value;
-    let taskInput = this.taskRef.current.value;
+    let comName = comRef.current.value;
+    let taskInput = taskRef.current.value;
 
     let task = {
       commitmentName: comName,
       taskDescription: taskInput,
     };
 
-    this.props.addChecklistTask(task);
+    props.addChecklistTask(task);
   };
 
-  hideCompletedTasks = (e) => {
+  const hideCompletedTasks = (e) => {
     e.preventDefault();
     alert("todo!");
   };
 
-  render() {
-    return (
-      <form className="checklist-form">
-        <div>
-          <label htmlFor="checklist-commitment-selection">Commitment: </label>
-          <select className="checklist-commitment-selection" ref={this.comRef}>
-            {this.commitments.map((commitment) => (
-              <option key={commitment.id} value={commitment.name}>
-                {commitment.name}
-              </option>
-            ))}
-          </select>
-        </div>
+  return (
+    <form className="checklist-form">
+      <div>
+        <label htmlFor="checklist-commitment-selection">Commitment: </label>
+        <select className="checklist-commitment-selection" ref={comRef}>
+          {commitments.map((commitment) => (
+            <option key={commitment.id} value={commitment.name}>
+              {commitment.name}
+            </option>
+          ))}
+        </select>
+      </div>
 
-        <textarea
-          type="text"
-          placeholder="task description"
-          className="task-input"
-          rows="4"
-          cols="50"
-          ref={this.taskRef}
-        ></textarea>
+      <textarea
+        type="text"
+        placeholder="task description"
+        className="task-input"
+        rows="4"
+        cols="50"
+        ref={taskRef}
+      ></textarea>
 
-        <div className="checklist-form-button-container">
-          <button id="add-task-button" onClick={this.addChecklistTask}>
-            Add
-          </button>
-          <button id="hide-tasks-button" onClick={this.hideCompletedTasks}>
-            Hide Completed
-          </button>
-        </div>
-      </form>
-    );
-  }
+      <div className="checklist-form-button-container">
+        <button id="add-task-button" onClick={addChecklistTask}>
+          Add
+        </button>
+        <button id="hide-tasks-button" onClick={hideCompletedTasks}>
+          Hide Completed
+        </button>
+      </div>
+    </form>
+  );
 }
 
 export default ChecklistForm;
