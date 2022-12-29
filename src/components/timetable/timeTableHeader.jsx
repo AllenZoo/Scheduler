@@ -1,10 +1,16 @@
 import React from "react";
+import uniqid from "uniqid";
 
 function TimeTableHeader(props) {
   return (
     <div className="time-table-header">
       {props.data.map((date) => {
-        return <div className="time-table-header-day">{date.date}</div>;
+        let id = uniqid();
+        return (
+          <div className="time-table-header-day" key={id}>
+            {date.date}
+          </div>
+        );
       })}
     </div>
   );

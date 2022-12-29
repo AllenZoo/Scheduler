@@ -553,7 +553,8 @@ function App() {
     // });
     //console.log(newSchedule);
     //setState({ schedule });
-    setSchedule(schedule);
+    setSchedule(newSchedule);
+    //console.log(newSchedule);
 
     let newTemplate = [
       {
