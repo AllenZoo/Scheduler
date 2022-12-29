@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import WeeklyOutlook from "./WeeklyOutlook/weeklyOutlook";
 import DayPlan from "./DayPlan/dayPlan";
 import Commitments from "./Commitments/commitments";
-import React, { Component } from "react";
+import React, { Component, createContext, useEffect, useState } from "react";
 import Templates from "./Template/templates";
 import _ from "lodash";
 import Checklist from "./Checklist/checklist";
@@ -13,102 +13,162 @@ import Axios from "axios";
 import Data from "./Data/data";
 import axios from "axios";
 
-class App extends Component {
-  state = {
-    user: "",
-    commitments: [
-      {
-        id: 1,
-        key: 1,
-        name: "CS213",
-        type: "UBC course",
-        timeType: "weekly",
-        hours: "5",
-        minutes: "30",
-        colour: "red",
-      },
-      {
-        id: 2,
-        key: 2,
-        name: "CS215",
-        type: "UBC course",
-        timeType: "bi-weekly",
-        hours: "7",
-        minutes: "30",
-        colour: "green",
-      },
-    ],
+export const AppContext = createContext(null);
+function App() {
+  // const state = {
+  //   user: "",
+  //   commitments: [
+  // {
+  //   id: 1,
+  //   key: 1,
+  //   name: "CS213",
+  //   type: "UBC course",
+  //   timeType: "weekly",
+  //   hours: "5",
+  //   minutes: "30",
+  //   colour: "red",
+  // },
+  // {
+  //   id: 2,
+  //   key: 2,
+  //   name: "CS215",
+  //   type: "UBC course",
+  //   timeType: "bi-weekly",
+  //   hours: "7",
+  //   minutes: "30",
+  //   colour: "green",
+  // },
+  //   ],
 
-    daily_coms: [],
-    weekly_coms: [],
+  //   daily_coms: [],
+  //   weekly_coms: [],
 
-    schedule: [
-      {
-        date: "Monday",
-        plan: [],
-      },
-      {
-        date: "Tuesday",
-        plan: [],
-      },
-      {
-        date: "Wednesday",
-        plan: [],
-      },
-      {
-        date: "Thursday",
-        plan: [],
-      },
-      {
-        date: "Friday",
-        plan: [],
-      },
-      {
-        date: "Saturday",
-        plan: [],
-      },
-      {
-        date: "Sunday",
-        plan: [],
-      },
-    ],
+  //   schedule: [
+  //     {
+  //       date: "Monday",
+  //       plan: [],
+  //     },
+  //     {
+  //       date: "Tuesday",
+  //       plan: [],
+  //     },
+  //     {
+  //       date: "Wednesday",
+  //       plan: [],
+  //     },
+  //     {
+  //       date: "Thursday",
+  //       plan: [],
+  //     },
+  //     {
+  //       date: "Friday",
+  //       plan: [],
+  //     },
+  //     {
+  //       date: "Saturday",
+  //       plan: [],
+  //     },
+  //     {
+  //       date: "Sunday",
+  //       plan: [],
+  //     },
+  //   ],
 
-    template: [
-      {
-        date: "Monday",
-        plan: [],
-      },
-      {
-        date: "Tuesday",
-        plan: [],
-      },
-      {
-        date: "Wednesday",
-        plan: [],
-      },
-      {
-        date: "Thursday",
-        plan: [],
-      },
-      {
-        date: "Friday",
-        plan: [],
-      },
-      {
-        date: "Saturday",
-        plan: [],
-      },
-      {
-        date: "Sunday",
-        plan: [],
-      },
-    ],
+  //   template: [
+  // {
+  //   date: "Monday",
+  //   plan: [],
+  // },
+  // {
+  //   date: "Tuesday",
+  //   plan: [],
+  // },
+  // {
+  //   date: "Wednesday",
+  //   plan: [],
+  // },
+  // {
+  //   date: "Thursday",
+  //   plan: [],
+  // },
+  // {
+  //   date: "Friday",
+  //   plan: [],
+  // },
+  // {
+  //   date: "Saturday",
+  //   plan: [],
+  // },
+  // {
+  //   date: "Sunday",
+  //   plan: [],
+  // },
+  //   ],
 
-    tasks: [{ commitmentName: "cs221", taskDescription: "hi there", id: 2 }],
-    completedTasks: [],
-  };
+  //   tasks: [{ commitmentName: "cs221", taskDescription: "hi there", id: 2 }],
+  //   completedTasks: [],
+  // };
 
-  generateTimesList = () => {
+  const [user, setUser] = useState("");
+  const [commitments, setCommitments] = useState([
+    {
+      id: 1,
+      key: 1,
+      name: "CS213",
+      type: "UBC course",
+      timeType: "weekly",
+      hours: "5",
+      minutes: "30",
+      colour: "red",
+    },
+    {
+      id: 2,
+      key: 2,
+      name: "CS215",
+      type: "UBC course",
+      timeType: "bi-weekly",
+      hours: "7",
+      minutes: "30",
+      colour: "green",
+    },
+  ]);
+  const [daily_coms, setDaily_coms] = useState([]);
+  const [weekly_coms, setWeekly_coms] = useState([]);
+  const [schedule, setSchedule] = useState([
+    {
+      date: "Monday",
+      plan: [],
+    },
+    {
+      date: "Tuesday",
+      plan: [],
+    },
+    {
+      date: "Wednesday",
+      plan: [],
+    },
+    {
+      date: "Thursday",
+      plan: [],
+    },
+    {
+      date: "Friday",
+      plan: [],
+    },
+    {
+      date: "Saturday",
+      plan: [],
+    },
+    {
+      date: "Sunday",
+      plan: [],
+    },
+  ]);
+  const [template, setTemplate] = useState([]);
+  const [tasks, setTasks] = useState([]);
+  const [completedTasks, setCompletedTasks] = useState([]);
+
+  const generateTimesList = () => {
     //credit to: Nicholas Tower & Harpreet
     var x = 30; //minutes interval
     var times = []; // time array
@@ -128,17 +188,18 @@ class App extends Component {
     }
     return times;
   };
-  times = this.generateTimesList();
 
-  generateEmptyPlan = () => {
+  const times = generateTimesList();
+
+  const generateEmptyPlan = () => {
     let map = new Map();
     let slot = { name: "", colour: "pink" };
-    this.times.map((time) => map.set(time, slot));
+    times.map((time) => map.set(time, slot));
     return map;
   };
 
-  generateTestPlan = () => {
-    let map = this.generateEmptyPlan();
+  const generateTestPlan = () => {
+    let map = generateEmptyPlan();
     map.set("9:30AM", {
       name: "Appointment DOUBLE LINE",
       colour: "lightgreen",
@@ -150,11 +211,11 @@ class App extends Component {
     return map;
   };
 
-  addToPlanTemplate = (plan) => {
-    let template = [...this.state.template];
+  const addToPlanTemplate = (plan) => {
+    let template = [...template];
 
-    let tsIndex = this.times.indexOf(plan.timeStart);
-    let teIndex = this.times.indexOf(plan.timeEnd);
+    let tsIndex = times.indexOf(plan.timeStart);
+    let teIndex = times.indexOf(plan.timeEnd);
 
     // Get index of schedule to change plan
     let index = 0;
@@ -170,7 +231,7 @@ class App extends Component {
     });
 
     // Array of times that we want to fill the map plan with the name.
-    let slicedTimes = this.times.slice(tsIndex, teIndex);
+    let slicedTimes = times.slice(tsIndex, teIndex);
 
     // Get previous plan and then add new time commitments to it.
     let ePlan = template[planIndex].plan;
@@ -181,42 +242,49 @@ class App extends Component {
     template[planIndex].plan = ePlan;
 
     // Set State
-    this.setState({ template });
+    setTemplate(template);
+    //setState({ template });
   };
 
-  handleClearTemplate = () => {
-    let template = [...this.state.template];
-    template.map((date) => (date.plan = this.generateEmptyPlan()));
-    this.setState({ template });
+  const handleClearTemplate = () => {
+    let template = [...template];
+    template.map((date) => (date.plan = generateEmptyPlan()));
+    //setState({ template });
+    setTemplate(template);
   };
 
-  handleDeleteCommitment = (id) => {
-    const commitments = this.state.commitments.filter((c) => c.id !== id);
-    this.setState({ commitments });
+  const handleDeleteCommitment = (id) => {
+    const commitments = commitments.filter((c) => c.id !== id);
+    //setState({ commitments });
+    setTemplate(template);
   };
 
-  addCommitment = (commitment) => {
-    let commitments = [...this.state.commitments];
-    let weekly_coms = [...this.state.weekly_coms];
+  const addCommitment = (commitment) => {
+    let commitments = [...commitments];
+    let weekly_coms = [...weekly_coms];
     commitments.push(commitment);
-    this.setState({ commitments });
+
+    //setState({ commitments });
+    setCommitments(commitments);
   };
 
-  addChecklistTask = (task) => {
-    let tasks = [...this.state.tasks];
+  const addChecklistTask = (task) => {
+    let tasks = [...tasks];
     tasks.push(task);
 
-    this.setState({ tasks }, () => {
-      console.log(this.state.tasks);
-      this.forceUpdate();
-      this.setState(this.state);
-    });
+    // setState({ tasks }, () => {
+    //   console.log(tasks);
+    //   forceUpdate();
+    //   setState(state);
+    // });
+
+    setTasks(tasks);
   };
 
-  toggleTask = (taskId, taskState) => {
+  const toggleTask = (taskId, taskState) => {
     //console.log("the task we toggling has task id: " + taskId);
-    let tasks = [...this.state.tasks];
-    let completedTasks = [...this.state.completedTasks];
+    let tasks = [...tasks];
+    let completedTasks = [...completedTasks];
     if (taskState) {
       // checkbox was just toggled on - remove task from tasks and add to completed tasks
       let task = tasks.find((task) => {
@@ -237,16 +305,19 @@ class App extends Component {
       tasks.push(task);
     }
 
-    this.setState({ completedTasks }, () => {
-      console.log(this.state.completedTasks);
-    });
-    this.setState({ tasks });
+    // setState({ completedTasks }, () => {
+    //   console.log(completedTasks);
+    // });
+    // setState({ tasks });
+
+    setCompletedTasks(completedTasks);
+    setTasks(tasks);
   };
 
-  generateSchedule = () => {
-    let inputList = this.getInputList();
-    let schedule = _.cloneDeep(this.state.template);
-    //let schedule = [...this.state.template];
+  const generateSchedule = () => {
+    let inputList = getInputList();
+    let schedule = _.cloneDeep(template);
+    //let schedule = [...template];
     //console.log(schedule);
     schedule.forEach(function (dateColumn) {
       fillPlan(dateColumn.plan, inputList);
@@ -302,13 +373,14 @@ class App extends Component {
     }
 
     //console.log(schedule);
-    //console.log(this.state.template);
-    this.setState({ schedule });
+    //console.log(template);
+    //setState({ schedule });
+    setSchedule(schedule);
   };
 
-  getInputList = () => {
+  const getInputList = () => {
     let inputList = [];
-    this.state.commitments.forEach(function (commitment) {
+    commitments.forEach(function (commitment) {
       let blocks = commitment.hours * 2 + commitment.minutes / 30;
 
       switch (commitment.timeType) {
@@ -352,12 +424,12 @@ class App extends Component {
     return inputList;
   };
 
-  saveData = (user) => {
-    const jsonCommitments = JSON.stringify(this.state.commitments);
-    const jsonTasks = JSON.stringify(this.state.tasks);
-    const jsonCTasks = JSON.stringify(this.state.completedTasks);
-    const jsonSchedule = JSON.stringify(this.state.schedule, this.replacer);
-    const jsonTemplate = JSON.stringify(this.state.template, this.replacer);
+  const saveData = (user) => {
+    const jsonCommitments = JSON.stringify(commitments);
+    const jsonTasks = JSON.stringify(tasks);
+    const jsonCTasks = JSON.stringify(completedTasks);
+    const jsonSchedule = JSON.stringify(schedule, replacer);
+    const jsonTemplate = JSON.stringify(template, replacer);
 
     Axios.post("http://localhost:3001/save", {
       user: user,
@@ -372,30 +444,36 @@ class App extends Component {
     });
   };
 
-  loadData = (user) => {
+  const loadData = (user) => {
     Axios.post("http://localhost:3001/load", {
       user: user,
     }).then((response) => {
-      this.processLoading(response.data);
+      processLoading(response.data);
     });
   };
 
-  processLoading = (data) => {
+  const processLoading = (data) => {
     let userData = data[0];
     let commitments = JSON.parse(userData.commitments);
     let tasks = JSON.parse(userData.tasks);
     let completedTasks = JSON.parse(userData.completed_tasks);
-    let schedule = JSON.parse(userData.schedule, this.reviver);
-    let template = JSON.parse(userData.template, this.reviver);
+    let schedule = JSON.parse(userData.schedule, reviver);
+    let template = JSON.parse(userData.template, reviver);
 
-    this.setState({ schedule });
-    this.setState({ template });
-    this.setState({ commitments });
-    this.setState({ tasks });
-    this.setState({ completedTasks });
+    // setState({ schedule });
+    // setState({ template });
+    // setState({ commitments });
+    // setState({ tasks });
+    // setState({ completedTasks });
+
+    setSchedule(schedule);
+    setTemplate(template);
+    setCommitments(commitments);
+    setTasks(tasks);
+    setCompletedTasks(completedTasks);
   };
 
-  replacer(key, value) {
+  function replacer(key, value) {
     if (value instanceof Map) {
       return {
         dataType: "Map",
@@ -406,7 +484,7 @@ class App extends Component {
     }
   }
 
-  reviver(key, value) {
+  function reviver(key, value) {
     if (typeof value === "object" && value !== null) {
       if (value.dataType === "Map") {
         return new Map(value.value);
@@ -415,7 +493,7 @@ class App extends Component {
     return value;
   }
 
-  getDayPlan() {
+  function getDayPlan() {
     //console.log(new Date().toLocaleString("en-us", { weekday: "long" }));
     let day = new Date().toLocaleString("en-us", { weekday: "long" });
     // schedule: [
@@ -435,20 +513,118 @@ class App extends Component {
     return schedule;
   }
 
-  componentDidMount() {
-    let schedule = [...this.state.schedule];
-    schedule.map((date) => (date.plan = this.generateTestPlan()));
-    this.setState({ schedule });
+  // Run once to initialize schedule
+  useEffect(() => {
+    let newSchedule = [
+      {
+        date: "Monday",
+        plan: [],
+      },
+      {
+        date: "Tuesday",
+        plan: [],
+      },
+      {
+        date: "Wednesday",
+        plan: [],
+      },
+      {
+        date: "Thursday",
+        plan: [],
+      },
+      {
+        date: "Friday",
+        plan: [],
+      },
+      {
+        date: "Saturday",
+        plan: [],
+      },
+      {
+        date: "Sunday",
+        plan: [],
+      },
+    ];
 
-    let template = [...this.state.template];
-    template.map((date) => (date.plan = this.generateEmptyPlan()));
-    this.setState({ template });
+    console.log(newSchedule);
+    newSchedule.map((date) => (date.plan = generateTestPlan()));
+    // .then(() => {
+    //   setSchedule(newSchedule);
+    // });
+    //console.log(newSchedule);
+    //setState({ schedule });
+    setSchedule(schedule);
+
+    let newTemplate = [
+      {
+        date: "Monday",
+        plan: [],
+      },
+      {
+        date: "Tuesday",
+        plan: [],
+      },
+      {
+        date: "Wednesday",
+        plan: [],
+      },
+      {
+        date: "Thursday",
+        plan: [],
+      },
+      {
+        date: "Friday",
+        plan: [],
+      },
+      {
+        date: "Saturday",
+        plan: [],
+      },
+      {
+        date: "Sunday",
+        plan: [],
+      },
+    ];
+    newTemplate.map((date) => (date.plan = generateEmptyPlan()));
+    // //setState({ template });
+    setTemplate(newTemplate);
+
+    // console.log(new Date().toLocaleString("en-us", { weekday: "long" }));
+  }, []);
+
+  // useEffect(() => {
+  //   setSchedule(schedule);
+  // }, [schedule]);
+
+  function componentDidMount() {
+    let schedule = [...schedule];
+    schedule.map((date) => (date.plan = generateTestPlan()));
+    //setState({ schedule });
+    setSchedule(schedule);
+
+    let template = [...template];
+    template.map((date) => (date.plan = generateEmptyPlan()));
+    //setState({ template });
+    setTemplate(template);
 
     console.log(new Date().toLocaleString("en-us", { weekday: "long" }));
   }
 
-  render() {
-    return (
+  return (
+    <AppContext.Provider
+      value={{
+        schedule,
+        setSchedule,
+        template,
+        setTemplate,
+        commitments,
+        setCommitments,
+        tasks,
+        setTasks,
+        completedTasks,
+        setCompletedTasks,
+      }}
+    >
       <div className="App">
         <Router>
           <Navbar></Navbar>
@@ -458,39 +634,39 @@ class App extends Component {
               path="/weeklyoutlook"
               element={
                 <WeeklyOutlook
-                  schedule={this.state.schedule}
-                  generateSchedule={this.generateSchedule}
+                  schedule={schedule}
+                  generateSchedule={generateSchedule}
                 ></WeeklyOutlook>
               }
             />
 
             <Route
               path="/dayplan"
-              element={<DayPlan schedule={this.state.schedule}></DayPlan>}
+              element={<DayPlan schedule={schedule}></DayPlan>}
             />
             <Route
               path="/checklist"
               element={
                 <Checklist
-                  tasks={this.state.tasks}
-                  completedTasks={this.state.completedTasks}
-                  commitments={this.state.commitments}
-                  addChecklistTask={this.addChecklistTask}
-                  toggleTask={this.toggleTask}
+                  tasks={tasks}
+                  completedTasks={completedTasks}
+                  commitments={commitments}
+                  addChecklistTask={addChecklistTask}
+                  toggleTask={toggleTask}
                 ></Checklist>
               }
             ></Route>
             <Route
               path="/goals"
-              element={<Goals commitments={this.state.commitments}></Goals>}
+              element={<Goals commitments={commitments}></Goals>}
             ></Route>
             <Route
               path="/commitments"
               element={
                 <Commitments
-                  commitments={this.state.commitments}
-                  handleDeleteCommitment={this.handleDeleteCommitment}
-                  addCommitment={this.addCommitment}
+                  commitments={commitments}
+                  handleDeleteCommitment={handleDeleteCommitment}
+                  addCommitment={addCommitment}
                 ></Commitments>
               }
             ></Route>
@@ -498,10 +674,10 @@ class App extends Component {
               path="/templates"
               element={
                 <Templates
-                  template={this.state.template}
-                  times={this.times}
-                  handleAddToPlan={this.addToPlanTemplate}
-                  handleClearTemplate={this.handleClearTemplate}
+                  template={template}
+                  times={times}
+                  handleAddToPlan={addToPlanTemplate}
+                  handleClearTemplate={handleClearTemplate}
                 />
               }
             />
@@ -509,17 +685,17 @@ class App extends Component {
               path="/data"
               element={
                 <Data
-                  user={this.state.user}
-                  handleSave={this.saveData}
-                  handleLoad={this.loadData}
+                  user={user}
+                  handleSave={saveData}
+                  handleLoad={loadData}
                 ></Data>
               }
             />
           </Routes>
         </Router>
       </div>
-    );
-  }
+    </AppContext.Provider>
+  );
 }
 
 export default App;

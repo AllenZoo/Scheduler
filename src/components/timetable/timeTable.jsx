@@ -3,6 +3,7 @@ import "../../css/table.css";
 import "../../css/contentbody.css";
 import TimeTableHeader from "./timeTableHeader";
 import TimeTableBody from "./timeTableBody";
+import { useContext } from "react";
 
 function TimeTable(props) {
   const generateTimesList = () => {
@@ -28,6 +29,9 @@ function TimeTable(props) {
   };
 
   const times = generateTimesList();
+
+  //const { schedule } = useContext(AppContext);
+
   return (
     <div id="time-table">
       {/* <div id="time-stamp-bar">
