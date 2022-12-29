@@ -39,6 +39,9 @@ class App extends Component {
       },
     ],
 
+    daily_coms: [],
+    weekly_coms: [],
+
     schedule: [
       {
         date: "Monday",
@@ -194,6 +197,7 @@ class App extends Component {
 
   addCommitment = (commitment) => {
     let commitments = [...this.state.commitments];
+    let weekly_coms = [...this.state.weekly_coms];
     commitments.push(commitment);
     this.setState({ commitments });
   };
