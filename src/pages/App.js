@@ -263,6 +263,23 @@ function App() {
     setCommitments(newCommitments);
   };
 
+  const reassignCommitments = () => {
+    let newDaily_coms = [...daily_coms];
+    let newWeekly_coms = [...weekly_coms];
+
+    let newCommitments = [...commitments];
+    newCommitments.map((com) => {
+      if (com.timeType.toLowerCase() == "daily") {
+        newDaily_coms.push(com);
+      } else if (com.timeType.toLowerCase() == "weekly") {
+        newWeekly_coms.push(com);
+      }
+    });
+
+    setDaily_coms(newDaily_coms);
+    setWeekly_coms(newWeekly_coms);
+  };
+
   const addChecklistTask = (task) => {
     let newTasks = [...tasks];
     newTasks.push(task);
@@ -311,40 +328,42 @@ function App() {
 
   // MAIN FUNCTION
   const generateSchedule = () => {
-    let inputList = getInputList();
+    //let inputList = getInputList();
     let newSchedule = _.cloneDeep(template);
     console.log(commitments);
     newSchedule.forEach(function (dateColumn) {
-      fillPlan(dateColumn.plan, inputList);
+      let dailyList = getDailyInputList();
+      let weeklyList = getWeeklyInputList();
+      // fill daily
+      fillPlan(dateColumn.plan, dailyList);
+      fillPlan(dateColumn.plan, weeklyList);
     });
 
-    function fillPlan(plan, inputList) {
-      // block[0] is key, block[1] is value
-
-      // let block = getNextEmptyBlock(plan);
-      // let popped = inputList.pop();
-      // plan.set(block[0], popped);
-
+    function fillPlan(plan, dailyList) {
+      //console.log(dailyList);
       let eBlocks = getEmptyTimeBlocks(plan);
-      //console.log(eBlocks[0]);
+      let list = [...dailyList];
+      console.log(list);
 
       eBlocks.forEach(function (block) {
-        let popped = inputList.pop();
-
+        let popped = list.pop();
         if (popped) {
+          //console.log("setting block to something!");
           plan.set(block[0], popped);
         } else {
-          plan.set(block[0], "");
+          //console.log("setting block to nothing!");
+          let eSlot = { name: "", colour: "pink" };
+          plan.set(block[0], eSlot);
         }
       });
-
-      //console.log(plan);
     }
 
     function getEmptyTimeBlocks(plan) {
       let eBlocks = [];
       Array.from(plan).forEach(function (block) {
-        if (block[1] === "") {
+        //console.log(block[1]);
+        if (block[1].name == "") {
+          console.log("adding block");
           eBlocks.push(block);
         }
       });
@@ -370,6 +389,39 @@ function App() {
     setSchedule(newSchedule);
   };
 
+  const getDailyInputList = () => {
+    //console.log("getting daily input list");
+    //console.log(daily_coms);
+    let inputList = [];
+    daily_coms.forEach(function (commitment) {
+      let blocks = commitment.hours * 2 + commitment.minutes / 30;
+
+      for (let i = 0; i < blocks; i++) {
+        inputList.push(commitment);
+      }
+    });
+
+    // shuffle blocks to input
+    shuffle(inputList);
+    console.log(inputList);
+    return inputList;
+  };
+
+  const getWeeklyInputList = () => {
+    let inputList = [];
+    weekly_coms.forEach(function (commitment) {
+      let blocks = commitment.hours * 2 + commitment.minutes / 30;
+
+      for (let i = 0; i < blocks; i++) {
+        inputList.push(commitment);
+      }
+    });
+    console.log(inputList);
+    // shuffle blocks to input
+    shuffle(inputList);
+    return inputList;
+  };
+
   const getInputList = () => {
     let inputList = [];
     commitments.forEach(function (commitment) {
@@ -392,28 +444,28 @@ function App() {
       }
     });
 
-    // shuffle function
-    const shuffle = (array) => {
-      let currentIndex = array.length,
-        randomIndex;
-
-      // While there remain elements to shuffle.
-      while (currentIndex != 0) {
-        // Pick a remaining element.
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-
-        // And swap it with the current element.
-        [array[currentIndex], array[randomIndex]] = [
-          array[randomIndex],
-          array[currentIndex],
-        ];
-      }
-    };
-
     // shuffle blocks to input
     shuffle(inputList);
     return inputList;
+  };
+
+  // shuffle function
+  const shuffle = (array) => {
+    let currentIndex = array.length,
+      randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
+      ];
+    }
   };
 
   const saveDataDB = (user) => {
@@ -629,6 +681,10 @@ function App() {
   useEffect(() => {
     initStates();
   }, []);
+
+  useEffect(() => {
+    reassignCommitments();
+  }, [commitments]);
 
   return (
     <AppContext.Provider
