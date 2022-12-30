@@ -3,8 +3,7 @@ import "../../../css/general.css";
 
 function Commitment(props) {
   function onDelete() {
-    // TODO: fix props
-    //this.props.onDelete(this.props.commitment.id);
+    props.onDelete(props.commitment.id);
   }
 
   const { commitment } = props;

@@ -112,8 +112,10 @@ function App() {
 
   const [user, setUser] = useState("");
   const [commitments, setCommitments] = useState([]);
+
   const [daily_coms, setDaily_coms] = useState([]);
   const [weekly_coms, setWeekly_coms] = useState([]);
+
   const [schedule, setSchedule] = useState([
     {
       date: "Monday",
@@ -227,30 +229,43 @@ function App() {
   };
 
   const handleClearTemplate = () => {
-    let template = [...template];
-    template.map((date) => (date.plan = generateEmptyPlan()));
+    let newTemplate = [...template];
+    newTemplate.map((date) => (date.plan = generateEmptyPlan()));
     //setState({ template });
-    setTemplate(template);
+    setTemplate(newTemplate);
   };
 
   const handleDeleteCommitment = (id) => {
-    const commitments = commitments.filter((c) => c.id !== id);
-    //setState({ commitments });
-    setTemplate(template);
-  };
-
-  const addCommitment = (commitment) => {
-    let newCommitments = [...commitments];
-    //let weekly_coms = [...weekly_coms];
-    newCommitments.push(commitment);
-
+    const newCommitments = commitments.filter((c) => c.id !== id);
+    console.log("deleted commitment");
     //setState({ commitments });
     setCommitments(newCommitments);
   };
 
+  const addCommitment = (commitment) => {
+    let newCommitments = [...commitments];
+    newCommitments.push(commitment);
+
+    if (commitment.timeType.toLowerCase() == "daily") {
+      console.log("daily");
+      let newDaily_coms = [...daily_coms];
+      newDaily_coms.push(commitment);
+      setDaily_coms(newDaily_coms);
+    } else if (commitment.timeType.toLowerCase() == "weekly") {
+      console.log("weekly");
+      let newWeekly_coms = [...weekly_coms];
+      newWeekly_coms.push(commitment);
+      setWeekly_coms(newWeekly_coms);
+    }
+
+    console.log("added commitment");
+
+    setCommitments(newCommitments);
+  };
+
   const addChecklistTask = (task) => {
-    let tasks = [...tasks];
-    tasks.push(task);
+    let newTasks = [...tasks];
+    newTasks.push(task);
 
     // setState({ tasks }, () => {
     //   console.log(tasks);
@@ -258,7 +273,7 @@ function App() {
     //   setState(state);
     // });
 
-    setTasks(tasks);
+    setTasks(newTasks);
   };
 
   const toggleTask = (taskId, taskState) => {
@@ -294,12 +309,12 @@ function App() {
     setTasks(tasks);
   };
 
+  // MAIN FUNCTION
   const generateSchedule = () => {
     let inputList = getInputList();
-    let schedule = _.cloneDeep(template);
-    //let schedule = [...template];
-    //console.log(schedule);
-    schedule.forEach(function (dateColumn) {
+    let newSchedule = _.cloneDeep(template);
+    console.log(commitments);
+    newSchedule.forEach(function (dateColumn) {
       fillPlan(dateColumn.plan, inputList);
     });
 
@@ -352,10 +367,7 @@ function App() {
       return eBlock;
     }
 
-    //console.log(schedule);
-    //console.log(template);
-    //setState({ schedule });
-    setSchedule(schedule);
+    setSchedule(newSchedule);
   };
 
   const getInputList = () => {
@@ -511,8 +523,7 @@ function App() {
     return schedule;
   }
 
-  // Run once to initialize schedule
-  useEffect(() => {
+  function initStates() {
     let newSchedule = [
       {
         date: "Monday",
@@ -588,50 +599,36 @@ function App() {
     // //setState({ template });
     setTemplate(newTemplate);
 
-    let newCommitments = [
-      {
-        id: 1,
-        key: 1,
-        name: "CS213",
-        type: "UBC course",
-        timeType: "weekly",
-        hours: "5",
-        minutes: "30",
-        colour: "red",
-      },
-      {
-        id: 2,
-        key: 2,
-        name: "CS215",
-        type: "UBC course",
-        timeType: "bi-weekly",
-        hours: "7",
-        minutes: "30",
-        colour: "green",
-      },
-    ];
+    let newCommitments = [];
     setCommitments(newCommitments);
+    let com1 = {
+      id: 1,
+      key: 1,
+      name: "CS213",
+      type: "UBC course",
+      timeType: "weekly",
+      hours: "5",
+      minutes: "30",
+      colour: "red",
+    };
+    let com2 = {
+      id: 2,
+      key: 2,
+      name: "CS215",
+      type: "UBC course",
+      timeType: "bi-weekly",
+      hours: "7",
+      minutes: "30",
+      colour: "green",
+    };
 
-    // console.log(new Date().toLocaleString("en-us", { weekday: "long" }));
-  }, []);
-
-  // useEffect(() => {
-  //   setSchedule(schedule);
-  // }, [schedule]);
-
-  function componentDidMount() {
-    let schedule = [...schedule];
-    schedule.map((date) => (date.plan = generateTestPlan()));
-    //setState({ schedule });
-    setSchedule(schedule);
-
-    let template = [...template];
-    template.map((date) => (date.plan = generateEmptyPlan()));
-    //setState({ template });
-    setTemplate(template);
-
-    console.log(new Date().toLocaleString("en-us", { weekday: "long" }));
+    addCommitment(com1);
+    addCommitment(com2);
   }
+  // Run once to initialize schedule
+  useEffect(() => {
+    initStates();
+  }, []);
 
   return (
     <AppContext.Provider
