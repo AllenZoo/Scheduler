@@ -14,6 +14,7 @@ function Navbar() {
         <CustomLink to="/commitments">Commitments</CustomLink>
         <CustomLink to="/templates">Templates</CustomLink>
         <CustomLink to="/data">Data</CustomLink>
+        <CustomLink to="/test">Test</CustomLink>
       </ul>
     </div>
   );

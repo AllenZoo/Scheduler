@@ -12,6 +12,7 @@ import Goals from "./Goals/goals";
 import Axios from "axios";
 import Data from "./Data/data";
 import axios from "axios";
+import TestArea from "./Test/testArea";
 
 export const AppContext = createContext(null);
 function App() {
@@ -110,28 +111,7 @@ function App() {
   // };
 
   const [user, setUser] = useState("");
-  const [commitments, setCommitments] = useState([
-    {
-      id: 1,
-      key: 1,
-      name: "CS213",
-      type: "UBC course",
-      timeType: "weekly",
-      hours: "5",
-      minutes: "30",
-      colour: "red",
-    },
-    {
-      id: 2,
-      key: 2,
-      name: "CS215",
-      type: "UBC course",
-      timeType: "bi-weekly",
-      hours: "7",
-      minutes: "30",
-      colour: "green",
-    },
-  ]);
+  const [commitments, setCommitments] = useState([]);
   const [daily_coms, setDaily_coms] = useState([]);
   const [weekly_coms, setWeekly_coms] = useState([]);
   const [schedule, setSchedule] = useState([
@@ -212,7 +192,7 @@ function App() {
   };
 
   const addToPlanTemplate = (plan) => {
-    let template = [...template];
+    let newTemplate = [...template];
 
     let tsIndex = times.indexOf(plan.timeStart);
     let teIndex = times.indexOf(plan.timeEnd);
@@ -220,7 +200,7 @@ function App() {
     // Get index of schedule to change plan
     let index = 0;
     let planIndex = -1;
-    template.forEach(function (dateColumn) {
+    newTemplate.forEach(function (dateColumn) {
       if (dateColumn.date === plan.day) {
         //console.log("found index!");
         planIndex = index;
@@ -234,15 +214,15 @@ function App() {
     let slicedTimes = times.slice(tsIndex, teIndex);
 
     // Get previous plan and then add new time commitments to it.
-    let ePlan = template[planIndex].plan;
+    let ePlan = newTemplate[planIndex].plan;
     let slot = { name: plan.name, colour: plan.colour };
     slicedTimes.map((time) => ePlan.set(time, slot));
 
     // Define new plan onto schedule
-    template[planIndex].plan = ePlan;
+    newTemplate[planIndex].plan = ePlan;
 
     // Set State
-    setTemplate(template);
+    setTemplate(newTemplate);
     //setState({ template });
   };
 
@@ -260,12 +240,12 @@ function App() {
   };
 
   const addCommitment = (commitment) => {
-    let commitments = [...commitments];
-    let weekly_coms = [...weekly_coms];
-    commitments.push(commitment);
+    let newCommitments = [...commitments];
+    //let weekly_coms = [...weekly_coms];
+    newCommitments.push(commitment);
 
     //setState({ commitments });
-    setCommitments(commitments);
+    setCommitments(newCommitments);
   };
 
   const addChecklistTask = (task) => {
@@ -424,7 +404,7 @@ function App() {
     return inputList;
   };
 
-  const saveData = (user) => {
+  const saveDataDB = (user) => {
     const jsonCommitments = JSON.stringify(commitments);
     const jsonTasks = JSON.stringify(tasks);
     const jsonCTasks = JSON.stringify(completedTasks);
@@ -444,12 +424,36 @@ function App() {
     });
   };
 
-  const loadData = (user) => {
+  const loadDataDB = (user) => {
     Axios.post("http://localhost:3001/load", {
       user: user,
     }).then((response) => {
       processLoading(response.data);
     });
+  };
+
+  const saveDataLocal = (user) => {
+    console.log("saving to local storage");
+    const jsonCommitments = JSON.stringify(commitments);
+    const jsonTasks = JSON.stringify(tasks);
+    const jsonCTasks = JSON.stringify(completedTasks);
+    const jsonSchedule = JSON.stringify(schedule, replacer);
+    const jsonTemplate = JSON.stringify(template, replacer);
+
+    localStorage.setItem("commitments", jsonCommitments);
+    localStorage.setItem("tasks", jsonTasks);
+    localStorage.setItem("completed_tasks", jsonCTasks);
+    localStorage.setItem("schedule", jsonSchedule);
+    localStorage.setItem("template", jsonTemplate);
+  };
+
+  const loadDataLocal = (user) => {
+    console.log("loading from local storage");
+    setCommitments(JSON.parse(localStorage.getItem("commitments")));
+    setTasks(JSON.parse(localStorage.getItem("tasks")));
+    setCompletedTasks(JSON.parse(localStorage.getItem("completed_tasks")));
+    setSchedule(JSON.parse(localStorage.getItem("schedule"), reviver));
+    setTemplate(JSON.parse(localStorage.getItem("template"), reviver));
   };
 
   const processLoading = (data) => {
@@ -459,12 +463,6 @@ function App() {
     let completedTasks = JSON.parse(userData.completed_tasks);
     let schedule = JSON.parse(userData.schedule, reviver);
     let template = JSON.parse(userData.template, reviver);
-
-    // setState({ schedule });
-    // setState({ template });
-    // setState({ commitments });
-    // setState({ tasks });
-    // setState({ completedTasks });
 
     setSchedule(schedule);
     setTemplate(template);
@@ -590,6 +588,30 @@ function App() {
     // //setState({ template });
     setTemplate(newTemplate);
 
+    let newCommitments = [
+      {
+        id: 1,
+        key: 1,
+        name: "CS213",
+        type: "UBC course",
+        timeType: "weekly",
+        hours: "5",
+        minutes: "30",
+        colour: "red",
+      },
+      {
+        id: 2,
+        key: 2,
+        name: "CS215",
+        type: "UBC course",
+        timeType: "bi-weekly",
+        hours: "7",
+        minutes: "30",
+        colour: "green",
+      },
+    ];
+    setCommitments(newCommitments);
+
     // console.log(new Date().toLocaleString("en-us", { weekday: "long" }));
   }, []);
 
@@ -624,6 +646,7 @@ function App() {
         setTasks,
         completedTasks,
         setCompletedTasks,
+        generateEmptyPlan,
       }}
     >
       <div className="App">
@@ -687,11 +710,14 @@ function App() {
               element={
                 <Data
                   user={user}
-                  handleSave={saveData}
-                  handleLoad={loadData}
+                  handleSaveDB={saveDataDB}
+                  handleLoadDB={loadDataDB}
+                  handleSaveLocal={saveDataLocal}
+                  handleLoadLocal={loadDataLocal}
                 ></Data>
               }
             />
+            <Route path="/test" element={<TestArea />} />
           </Routes>
         </Router>
       </div>

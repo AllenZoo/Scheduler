@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import TimeTableRow from "./timeTableRow";
+import uniqid from "uniqid";
 
 function TimeTableBody(props) {
   const generateTimesList = () => {
@@ -46,7 +47,8 @@ function TimeTableBody(props) {
               <TimeTableRow
                 plan={slots}
                 time={time}
-                key={slots[0] + time}
+                // key={slots[0] + time}
+                key={uniqid()}
               ></TimeTableRow>
             );
           }

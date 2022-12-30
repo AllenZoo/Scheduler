@@ -34,14 +34,6 @@ function TimeTable(props) {
 
   return (
     <div id="time-table">
-      {/* <div id="time-stamp-bar">
-          <TimeBar></TimeBar>
-        </div>
-        <div id="time-table-dates">
-          {this.props.schedule.map((dateColumn) => (
-            <DateColumn key={dateColumn.date} data={dateColumn}></DateColumn>
-          ))}
-        </div> */}
       <div className="time-table-header-container">
         <div className="time-table-header-padding"></div>
         <TimeTableHeader data={props.schedule}></TimeTableHeader>

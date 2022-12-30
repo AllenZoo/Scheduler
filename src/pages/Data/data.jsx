@@ -5,12 +5,20 @@ import "../../css/data.css";
 function Data(props) {
   const userRef = useRef();
 
-  function handleSave() {
-    this.props.handleSave(userRef.current.value);
+  function handleSaveDB() {
+    props.handleSaveDB(userRef.current.value);
   }
 
-  function handleLoad() {
-    this.props.handleLoad(userRef.current.value);
+  function handleLoadDB() {
+    props.handleLoadDB(userRef.current.value);
+  }
+
+  function handleSaveLocal() {
+    props.handleSaveLocal(userRef.current.value);
+  }
+
+  function handleLoadLocal() {
+    props.handleLoadLocal(userRef.current.value);
   }
 
   return (
@@ -22,8 +30,10 @@ function Data(props) {
           <input id="user-name-input" type="text" ref={userRef}></input>
         </div>
 
-        <button onClick={handleSave}>Save</button>
-        <button onClick={handleLoad}>Load</button>
+        <button onClick={handleSaveDB}>Save</button>
+        <button onClick={handleLoadDB}>Load</button>
+        <button onClick={handleSaveLocal}>Save Local</button>
+        <button onClick={handleLoadLocal}>Load Local</button>
       </div>
       <div className="data-page-background"></div>
     </div>
