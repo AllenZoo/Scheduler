@@ -22,7 +22,7 @@ function DayPlan(props) {
     <div>
       <div className="day-plan-container">
         <div className="page-title">Day Plan</div>
-        <TimeTable schedule={dayPlan}></TimeTable>
+        <TimeTable schedule={dayPlan} interactable={false}></TimeTable>
       </div>
 
       <div className="dayplan-page-background"></div>

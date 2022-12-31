@@ -38,6 +38,9 @@ function TimeTableBody(props) {
             // checks if data has be loaded yet.
             if (date.plan.size > 0) {
               // adds data to slots.
+
+              let slotData = date.plan.get(time);
+              slotData["date"] = date.date;
               slots.push(date.plan.get(time));
             }
           });

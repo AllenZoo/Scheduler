@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import uniqid from "uniqid";
+import TimeTableSlot from "./timeTableSlot";
 
 function TimeTableRow(props) {
   return (
@@ -8,28 +9,7 @@ function TimeTableRow(props) {
       <div className="time-table-row-plan-container">
         {props.plan.map((slot) => {
           let id = uniqid();
-
-          if (slot.colour != "" && slot.name != "") {
-            return (
-              <div
-                className="time-table-row-plan-slot"
-                style={{ backgroundColor: slot.colour }}
-                key={id}
-              >
-                {slot.name}
-              </div>
-            );
-          } else {
-            return (
-              <div
-                className="time-table-row-plan-slot"
-                style={{ backgroundColor: "darkgoldenrod" }}
-                key={id}
-              >
-                &#10240;
-              </div>
-            );
-          }
+          return <TimeTableSlot slot={slot} key={id} id={id}></TimeTableSlot>;
         })}
       </div>
     </div>
