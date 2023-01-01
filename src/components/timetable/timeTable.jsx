@@ -9,6 +9,9 @@ import { useEffect } from "react";
 import _ from "lodash";
 import TimeTableForm from "./timeTableForm";
 import styled from "styled-components";
+import TemplateForm from "../../pages/Template/components/templateForm";
+import { useContext } from "react";
+import { AppContext } from "../../pages/App";
 
 const TimeTableContainer = styled.div`
   position: relative;
@@ -37,10 +40,20 @@ const TTHeaderPaddng = styled.div`
   flex: 1;
 `;
 
+const TTFormRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  column-gap: 10px;
+`;
+
 export const timeContext = createContext(null);
 function TimeTable(props) {
   const [interactable, setInteractable] = useState(props.interactable);
   const [schedule, setSchedule] = useState(props.schedule);
+  const { addToPlanTemplate } = useContext(AppContext);
+  //const { removeFromPlanTemplate } = useContext(AppContext);
 
   // array of : {date: "mon/tue/wed/thu/fri/sat/sun", time: 8:00AM-11:30PM}
   const selected_slots = [];
@@ -130,7 +143,15 @@ function TimeTable(props) {
           <div>
             <TimeTableBody data={props.schedule}></TimeTableBody>
           </div>
-          <TimeTableForm handleSubmit={handleSubmit}></TimeTableForm>
+
+          <TTFormRow>
+            <TimeTableForm handleSubmit={handleSubmit}></TimeTableForm>
+            <TemplateForm
+              times={times}
+              handleClearTemplate={props.handleClearTemplate}
+              addToPlanTemplate={addToPlanTemplate}
+            ></TemplateForm>
+          </TTFormRow>
         </TimeTableContainer>
       </timeContext.Provider>
     );

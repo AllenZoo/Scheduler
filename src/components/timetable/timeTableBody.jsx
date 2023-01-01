@@ -63,19 +63,6 @@ function TimeTableBody(props) {
           }
         })
       }
-      {/* {props.data.map((data) => {
-          if (data.plan.size > 0) {
-            data.plan.forEach((value, key) => {
-              // key is time (eg. 8:00AM), value is slot object {name:'', colour: "green"}
-              //console.log(key, value);
-              //<TimeTableRow time={key} data={value}></TimeTableRow>;
-            });
-          } else {
-            console.log("array dne");
-          }
-        //data.plan.map((slot) => {}); //{" "}
-        <TimeTableRow time={data.plan[0]} data={data.plan[1]}></TimeTableRow>;
-        })} */}
     </div>
   );
 }

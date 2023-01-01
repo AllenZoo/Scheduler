@@ -16,11 +16,6 @@ function Templates(props) {
       <div className="template-container">
         <div className="page-title">Template</div>
         <TimeTable schedule={props.template} interactable={true}></TimeTable>
-        <TemplateForm
-          times={times}
-          handleClearTemplate={props.handleClearTemplate}
-          addToPlanTemplate={addToPlanTemplate}
-        ></TemplateForm>
       </div>
       <div id="content-body"></div>
     </div>

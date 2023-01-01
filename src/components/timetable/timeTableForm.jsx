@@ -34,7 +34,23 @@ const TTForm_Row = styled.div`
 `;
 const TTForm__Input = styled.input``;
 const TTForm_TextArea = styled.textarea``;
-const TTForm__Button = styled.button``;
+const TTForm__Button = styled.button`
+  background-color: rgb(219, 112, 147);
+  padding: 10px 20px 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(183, 81, 115);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  }
+
+  &:active {
+    background-color: rgb(131, 50, 77);
+  }
+`;
 const TTForm__Label = styled.label``;
 
 function TimeTableForm(props) {
@@ -88,7 +104,7 @@ function TimeTableForm(props) {
           ></TTForm__Input>
         </TTForm_Row>
 
-        <TTForm__Button>Submit</TTForm__Button>
+        <TTForm__Button>Add</TTForm__Button>
       </TTForm>
     </TTFormContainer>
   );

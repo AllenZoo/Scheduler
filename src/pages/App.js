@@ -700,6 +700,7 @@ function App() {
         completedTasks,
         setCompletedTasks,
         generateEmptyPlan,
+        addToPlanTemplate,
       }}
     >
       <div className="App">
