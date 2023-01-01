@@ -176,7 +176,11 @@ function App() {
   const generateEmptyPlan = () => {
     let map = new Map();
     let slot = { name: "", colour: "pink" };
-    times.map((time) => map.set(time, slot));
+
+    times.map((time) => {
+      let newSlot = _.cloneDeep(slot);
+      map.set(time, newSlot);
+    });
     return map;
   };
 

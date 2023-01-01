@@ -104,13 +104,18 @@ function TimeTable(props) {
       let index = props.schedule.findIndex((day) => {
         return day.date === slot.date;
       });
-      let timeIndex = props.schedule[index].plan.findIndex((time) => {
-        return time.time === slot.time;
-      });
 
-      props.schedule[index].plan[timeIndex].name = data.name;
+      let timeSlot = props.schedule[index].plan.get(slot.time);
+      console.log(timeSlot);
+
+      // let timeIndex = props.schedule[index].plan.findIndex((time) => {
+      //   return time.time === slot.time;
+      // });
+
+      props.schedule[index].plan.get(slot.time).name = data.name;
       //schedule[index].plan[timeIndex].desc = data.desc;
-      props.schedule[index].plan[timeIndex].colour = data.colour;
+      //props.schedule[index].plan[timeIndex].colour = data.colour;
+      //rerender();
     });
   }
 
