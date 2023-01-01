@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { useState } from "react";
 import { createContext } from "react";
 import { useEffect } from "react";
+import _ from "lodash";
 
 export const timeContext = createContext(null);
 function TimeTable(props) {
@@ -42,21 +43,18 @@ function TimeTable(props) {
   const times = generateTimesList();
 
   function toggleSelectedSlot(slot) {
-    console.log(slot);
+    //console.log(slot);
     let index = selected_slots.findIndex((selectedSlot) => {
-      console.log(selectedSlot.date === slot.date);
-      console.log(selectedSlot.time);
-      console.log(slot.time);
-      console.log(selectedSlot.time === slot.time);
-      return selectedSlot.date === slot.date && selectedSlot.time === slot.time;
+      return selectedSlot.time === slot.time && selectedSlot.date === slot.date;
     });
-    console.log(index);
+    //console.log(index);
     if (index === -1) {
-      selected_slots.push(slot);
+      let newSlot = _.cloneDeep(slot);
+      selected_slots.push(newSlot);
     } else {
       selected_slots.splice(index, 1);
     }
-    console.log(selected_slots[0]);
+    //console.log(selected_slots[0]);
   }
 
   function toggleSelectedSlotOld(slot) {
@@ -75,6 +73,12 @@ function TimeTable(props) {
       newSelectedSlots.splice(index, 1);
       setSelectedSlots(newSelectedSlots);
     }
+  }
+
+  function printSelectedSlots() {
+    selected_slots.forEach((slot) => {
+      console.log(slot);
+    });
   }
 
   useEffect(() => {
@@ -97,6 +101,7 @@ function TimeTable(props) {
         <div>
           <TimeTableBody data={props.schedule}></TimeTableBody>
         </div>
+        <button onClick={printSelectedSlots}>Print</button>
       </div>
     </timeContext.Provider>
   );
