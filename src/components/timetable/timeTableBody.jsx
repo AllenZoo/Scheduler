@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TimeTableRow from "./timeTableRow";
 import uniqid from "uniqid";
+import _ from "lodash";
 
 function TimeTableBody(props) {
   const generateTimesList = () => {
@@ -30,7 +31,7 @@ function TimeTableBody(props) {
     <div className="time-table-body">
       {
         // iterates through the times of lists
-        times.map((time) => {
+        times.map((time, i) => {
           let slots = [];
 
           //loops through each day and pushes activity of that day at time to array.
@@ -44,6 +45,8 @@ function TimeTableBody(props) {
               slots.push(date.plan.get(time));
             }
           });
+          //console.log(time);
+          //console.log(slots);
 
           if (slots != null) {
             return (

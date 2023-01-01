@@ -13,25 +13,26 @@ const TouchButton = styled.button`
   flex: 1;
 `;
 function TimeTableSlot(props) {
+  const [slotData, setSlotData] = useState(props.slot);
   const [isSelected, setIsSelected] = useState(false);
   const { interactable } = useContext(timeContext);
+  const { toggleSelectedSlot } = useContext(timeContext);
+
+  useEffect(() => {}, [props.slot, props.time]);
 
   useEffect(() => {
-    //setIsInteractable(interactable);
-    //console.log("Interactable: " + interactable);
-  }, []);
-
-  useEffect(() => {
-    if (isSelected) {
-      console.log("Selected");
-    } else {
-      console.log("Not Selected");
-    }
+    // if (isSelected) {
+    //   console.log("Selected");
+    // } else {
+    //   console.log("Not Selected");
+    // }
   }, [isSelected]);
 
   function toggleSelection() {
     if (!interactable) return;
-    setIsSelected(!isSelected);
+    let slot = slotData;
+    slot["time"] = props.time;
+    setIsSelected(!isSelected, toggleSelectedSlot(slot));
   }
 
   // empty time table slot

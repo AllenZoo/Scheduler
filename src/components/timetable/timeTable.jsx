@@ -11,6 +11,11 @@ import { useEffect } from "react";
 export const timeContext = createContext(null);
 function TimeTable(props) {
   const [interactable, setInteractable] = useState(props.interactable);
+  const [schedule, setSchedule] = useState(props.schedule);
+
+  // array of : {date: "mon/tue/wed/thu/fri/sat/sun", time: 8:00AM-11:30PM}
+  const selected_slots = [];
+  const [selectedSlots, setSelectedSlots] = useState([]);
 
   const generateTimesList = () => {
     //credit to: Nicholas Tower & Harpreet
@@ -36,16 +41,54 @@ function TimeTable(props) {
 
   const times = generateTimesList();
 
+  function toggleSelectedSlot(slot) {
+    console.log(slot);
+    let index = selected_slots.findIndex((selectedSlot) => {
+      console.log(selectedSlot.date === slot.date);
+      console.log(selectedSlot.time);
+      console.log(slot.time);
+      console.log(selectedSlot.time === slot.time);
+      return selectedSlot.date === slot.date && selectedSlot.time === slot.time;
+    });
+    console.log(index);
+    if (index === -1) {
+      selected_slots.push(slot);
+    } else {
+      selected_slots.splice(index, 1);
+    }
+    console.log(selected_slots[0]);
+  }
+
+  function toggleSelectedSlotOld(slot) {
+    //console.log(slot);
+    let index = selectedSlots.findIndex(
+      (selectedSlot) =>
+        selectedSlot.date == slot.date && selectedSlot.time == slot.time
+    );
+    //console.log(index);
+    if (index === -1) {
+      let slots = [...selectedSlots];
+      slots.push(slot);
+      setSelectedSlots(slots);
+    } else {
+      let newSelectedSlots = [...selectedSlots];
+      newSelectedSlots.splice(index, 1);
+      setSelectedSlots(newSelectedSlots);
+    }
+  }
+
   useEffect(() => {
-    //console.log("From props Interactable: " + props.interactable);
     setInteractable(props.interactable);
-    //console.log("Interactable: " + interactable);
   }, []);
 
+  useEffect(() => {
+    console.log(selectedSlots);
+  }, [selectedSlots]);
+
   //const { schedule } = useContext(AppContext);
-  console.log(props.schedule);
+  //console.log(props.schedule);
   return (
-    <timeContext.Provider value={{ interactable }}>
+    <timeContext.Provider value={{ interactable, toggleSelectedSlot }}>
       <div id="time-table">
         <div className="time-table-header-container">
           <div className="time-table-header-padding"></div>

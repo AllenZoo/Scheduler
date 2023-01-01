@@ -6,7 +6,7 @@ function WeeklyOutlook(props) {
   return (
     <div className="weekly-outlook-container">
       <div className="page-title">Weekly Outlook</div>
-      <TimeTable schedule={props.schedule} interactable={true}></TimeTable>
+      <TimeTable schedule={props.schedule} interactable={false}></TimeTable>
       {/* {console.log(props.schedule)} */}
       <div id="content-body">
         <div>

@@ -9,7 +9,15 @@ function TimeTableRow(props) {
       <div className="time-table-row-plan-container">
         {props.plan.map((slot) => {
           let id = uniqid();
-          return <TimeTableSlot slot={slot} key={id} id={id}></TimeTableSlot>;
+
+          return (
+            <TimeTableSlot
+              slot={slot}
+              time={props.time}
+              key={id}
+              id={id}
+            ></TimeTableSlot>
+          );
         })}
       </div>
     </div>
