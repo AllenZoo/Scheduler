@@ -8,6 +8,7 @@ import { useState } from "react";
 import { createContext } from "react";
 import { useEffect } from "react";
 import _ from "lodash";
+import TimeTableForm from "./timeTableForm";
 
 export const timeContext = createContext(null);
 function TimeTable(props) {
@@ -16,7 +17,6 @@ function TimeTable(props) {
 
   // array of : {date: "mon/tue/wed/thu/fri/sat/sun", time: 8:00AM-11:30PM}
   const selected_slots = [];
-  const [selectedSlots, setSelectedSlots] = useState([]);
 
   const generateTimesList = () => {
     //credit to: Nicholas Tower & Harpreet
@@ -57,22 +57,28 @@ function TimeTable(props) {
     //console.log(selected_slots[0]);
   }
 
-  function toggleSelectedSlotOld(slot) {
-    //console.log(slot);
-    let index = selectedSlots.findIndex(
-      (selectedSlot) =>
-        selectedSlot.date == slot.date && selectedSlot.time == slot.time
-    );
-    //console.log(index);
-    if (index === -1) {
-      let slots = [...selectedSlots];
-      slots.push(slot);
-      setSelectedSlots(slots);
-    } else {
-      let newSelectedSlots = [...selectedSlots];
-      newSelectedSlots.splice(index, 1);
-      setSelectedSlots(newSelectedSlots);
-    }
+  function modifySlots(data) {
+    console.log(schedule);
+    console.log(props.schedule);
+    selected_slots.forEach((slot) => {
+      let index = props.schedule.findIndex((day) => {
+        return day.date === slot.date;
+      });
+      let timeIndex = props.schedule[index].plan.findIndex((time) => {
+        return time.time === slot.time;
+      });
+
+      props.schedule[index].plan[timeIndex].name = data.name;
+      //schedule[index].plan[timeIndex].desc = data.desc;
+      props.schedule[index].plan[timeIndex].colour = data.colour;
+    });
+  }
+
+  function handleSubmit(name, desc, colour) {
+    console.log(name, desc, colour);
+    let data = { name, desc, colour };
+    setSchedule(props.schedule, modifySlots(data));
+    //printSelectedSlots();
   }
 
   function printSelectedSlots() {
@@ -85,12 +91,25 @@ function TimeTable(props) {
     setInteractable(props.interactable);
   }, []);
 
-  useEffect(() => {
-    console.log(selectedSlots);
-  }, [selectedSlots]);
+  // returns interactable timetable (with form)
+  if (interactable) {
+    return (
+      <timeContext.Provider value={{ interactable, toggleSelectedSlot }}>
+        <div id="time-table">
+          <div className="time-table-header-container">
+            <div className="time-table-header-padding"></div>
+            <TimeTableHeader data={props.schedule}></TimeTableHeader>
+          </div>
+          <div>
+            <TimeTableBody data={props.schedule}></TimeTableBody>
+          </div>
+          <TimeTableForm handleSubmit={handleSubmit}></TimeTableForm>
+        </div>
+      </timeContext.Provider>
+    );
+  }
 
-  //const { schedule } = useContext(AppContext);
-  //console.log(props.schedule);
+  // returns uninteractable timetable (no form)
   return (
     <timeContext.Provider value={{ interactable, toggleSelectedSlot }}>
       <div id="time-table">
@@ -101,7 +120,6 @@ function TimeTable(props) {
         <div>
           <TimeTableBody data={props.schedule}></TimeTableBody>
         </div>
-        <button onClick={printSelectedSlots}>Print</button>
       </div>
     </timeContext.Provider>
   );

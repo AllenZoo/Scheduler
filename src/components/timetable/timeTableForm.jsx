@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useRef } from "react";
 
 const TTFormContainer = styled.div`
   display: flex;
@@ -36,27 +37,45 @@ const TTForm_TextArea = styled.textarea``;
 const TTForm__Button = styled.button``;
 const TTForm__Label = styled.label``;
 
-function TimeTableForm() {
+function TimeTableForm(props) {
+  const nameRef = useRef();
+  const descRef = useRef();
+  const colourRef = useRef();
+
   const getRandomColour = () => {
     return "#" + Math.floor(Math.random() * 16777215).toString(16);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.handleSubmit(
+      nameRef.current.value,
+      descRef.current.value,
+      colourRef.current.value
+    );
+  };
+
   return (
     <TTFormContainer>
-      <TTForm>
+      <TTForm onSubmit={handleSubmit}>
         <TTForm_Title>Modify Selected Slots</TTForm_Title>
         <TTForm_Row>
           <TTForm__Label>Name: </TTForm__Label>
           <TTForm__Input
             type="text"
             placeholder="Name"
+            ref={nameRef}
             required
           ></TTForm__Input>
         </TTForm_Row>
 
         <TTForm_Row>
           <TTForm__Label>Description: </TTForm__Label>
-          <TTForm_TextArea required placeholder=""></TTForm_TextArea>
+          <TTForm_TextArea
+            ref={descRef}
+            required
+            placeholder=""
+          ></TTForm_TextArea>
         </TTForm_Row>
 
         <TTForm_Row>
@@ -64,6 +83,7 @@ function TimeTableForm() {
           <TTForm__Input
             type="color"
             placeholder="Colour"
+            ref={colourRef}
             defaultValue={getRandomColour()}
           ></TTForm__Input>
         </TTForm_Row>
