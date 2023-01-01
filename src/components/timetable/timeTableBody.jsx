@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import TimeTableRow from "./timeTableRow";
 import uniqid from "uniqid";
 import _ from "lodash";
+import styled from "styled-components";
+
+const TTBodyContainer = styled.div``;
 
 function TimeTableBody(props) {
   const generateTimesList = () => {

@@ -3,12 +3,39 @@ import "../../css/table.css";
 import "../../css/contentbody.css";
 import TimeTableHeader from "./timeTableHeader";
 import TimeTableBody from "./timeTableBody";
-import { useContext } from "react";
 import { useState } from "react";
 import { createContext } from "react";
 import { useEffect } from "react";
 import _ from "lodash";
 import TimeTableForm from "./timeTableForm";
+import styled from "styled-components";
+
+const TimeTableContainer = styled.div`
+  position: relative;
+  top: 0px;
+  bottom: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 10px;
+  z-index: 200;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 1000px;
+  margin: 10px auto;
+`;
+
+const TTHeaderContainer = styled.div`
+  display: flex;
+`;
+
+const TTHeaderPaddng = styled.div`
+  display: flex;
+  max-width: 85px;
+  flex: 1;
+`;
 
 export const timeContext = createContext(null);
 function TimeTable(props) {
@@ -95,16 +122,16 @@ function TimeTable(props) {
   if (interactable) {
     return (
       <timeContext.Provider value={{ interactable, toggleSelectedSlot }}>
-        <div id="time-table">
-          <div className="time-table-header-container">
-            <div className="time-table-header-padding"></div>
+        <TimeTableContainer>
+          <TTHeaderContainer>
+            <TTHeaderPaddng />
             <TimeTableHeader data={props.schedule}></TimeTableHeader>
-          </div>
+          </TTHeaderContainer>
           <div>
             <TimeTableBody data={props.schedule}></TimeTableBody>
           </div>
           <TimeTableForm handleSubmit={handleSubmit}></TimeTableForm>
-        </div>
+        </TimeTableContainer>
       </timeContext.Provider>
     );
   }
@@ -112,15 +139,15 @@ function TimeTable(props) {
   // returns uninteractable timetable (no form)
   return (
     <timeContext.Provider value={{ interactable, toggleSelectedSlot }}>
-      <div id="time-table">
-        <div className="time-table-header-container">
-          <div className="time-table-header-padding"></div>
+      <TimeTableContainer>
+        <TTHeaderContainer>
+          <TTHeaderPaddng />
           <TimeTableHeader data={props.schedule}></TimeTableHeader>
-        </div>
+        </TTHeaderContainer>
         <div>
           <TimeTableBody data={props.schedule}></TimeTableBody>
         </div>
-      </div>
+      </TimeTableContainer>
     </timeContext.Provider>
   );
 }

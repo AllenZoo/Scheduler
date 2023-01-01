@@ -1,6 +1,51 @@
 import React, { Component } from "react";
 import "../../../css/sidebutton.css";
 import { useRef } from "react";
+import styled from "styled-components";
+
+const CommitmentFormStyled = styled.form`
+  max-height: 480px;
+  max-width: 480px;
+  background-color: blueviolet;
+  position: fixed;
+  border-radius: 20px;
+  right: 50px;
+  bottom: 50px;
+  z-index: 201;
+  padding: 10px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+`;
+
+const CFTitle = styled.h1`
+  font-size: 30px;
+  margin: 0px;
+  padding: 0px;
+`;
+
+const CFButtonRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  column-gap: 10px;
+`;
+
+const CFButton = styled.button`
+  background-color: blanchedalmond;
+  padding: 10px 20px 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(172, 139, 90);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  }
+`;
 
 function CommitmentForm(props) {
   const commitmentTypeRef = useRef();
@@ -18,7 +63,17 @@ function CommitmentForm(props) {
     return "#" + Math.floor(Math.random() * 16777215).toString(16);
   };
 
-  function handleClick(e) {
+  const resetForm = (e) => {
+    e.preventDefault();
+    commitmentTypeRef.current.value = "DEFAULT";
+    commitmentNameRef.current.value = "";
+    timeTypeRef.current.value = "DEFAULT";
+    inputMinuteRef.current.value = "";
+    inputHourRef.current.value = "";
+    colourRef.current.value = getRandomColour();
+  };
+
+  function handleSubmit(e) {
     e.preventDefault();
     //console.log("clicked button " + this.commitmentTypeRef.current.value);
     let commitment = {
@@ -30,16 +85,14 @@ function CommitmentForm(props) {
       colour: colourRef.current.value,
     };
     console.log(commitment);
-
     // TODO: add validation
     props.handleFormSubmit(commitment);
+    resetForm(e);
   }
 
-  //onSubmit={this.handleSubmit}
-
   return (
-    <form id="add-commitment-form">
-      <h1>Add Commitment</h1>
+    <CommitmentFormStyled>
+      <CFTitle>Add Commitment</CFTitle>
       <div>
         <label htmlFor="commitment-type-selector">Commitment:</label>
         <select
@@ -54,6 +107,10 @@ function CommitmentForm(props) {
           <option value="UBC Course">UBC course</option>
           <option value="Online Course">Online course</option>
           <option value="Appointment">Appointment</option>
+          <option value="Work">Work</option>
+          <option value="Exercise">Exercise</option>
+          <option value="Reading">Reading</option>
+          <option value="Other">Other</option>
         </select>
       </div>
       <div>
@@ -102,6 +159,7 @@ function CommitmentForm(props) {
           ref={inputMinuteRef}
         >
           <option value="DEFAULT" disabled></option>
+          <option value="0">0</option>
           <option value="15">15</option>
           <option value="30">30</option>
           <option value="45">45</option>
@@ -118,20 +176,16 @@ function CommitmentForm(props) {
         ></input>
       </div>
       <div></div>
-      <div>
-        <button
-          id="commitment-confirm-button"
-          className="shadow-button"
-          onClick={handleClick}
+      <CFButtonRow>
+        <CFButton
+          onClick={handleSubmit}
           //type="submit"
         >
           Add
-        </button>
-        <button id="commitment-cancel-button" className="shadow-button">
-          Cancel
-        </button>
-      </div>
-    </form>
+        </CFButton>
+        <CFButton onClick={resetForm}>Clear</CFButton>
+      </CFButtonRow>
+    </CommitmentFormStyled>
   );
 }
 
