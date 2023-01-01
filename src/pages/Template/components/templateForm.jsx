@@ -9,6 +9,10 @@ function TemplateForm(props) {
   const nameRef = useRef();
   const colourRef = useRef();
 
+  const getRandomColour = () => {
+    return "#" + Math.floor(Math.random() * 16777215).toString(16);
+  };
+
   const addToPlanTemplate = () => {
     let plan = {
       day: dayRef.current.value,
@@ -60,7 +64,11 @@ function TemplateForm(props) {
       </div>
       <div>
         <label htmlFor="colour-code">Colour: </label>
-        <input type="color" ref={colourRef}></input>
+        <input
+          type="color"
+          defaultValue={getRandomColour()}
+          ref={colourRef}
+        ></input>
       </div>
       <div className="template-buttons">
         <button onClick={addToPlanTemplate}>Add</button>

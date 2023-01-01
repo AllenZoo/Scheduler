@@ -14,6 +14,10 @@ function CommitmentForm(props) {
     console.log("submitted form!");
   }
 
+  const getRandomColour = () => {
+    return "#" + Math.floor(Math.random() * 16777215).toString(16);
+  };
+
   function handleClick(e) {
     e.preventDefault();
     //console.log("clicked button " + this.commitmentTypeRef.current.value);
@@ -106,7 +110,12 @@ function CommitmentForm(props) {
       </div>
       <div>
         <label htmlFor="colour-picker">Colour: </label>
-        <input type="color" id="colour-picker" ref={colourRef}></input>
+        <input
+          type="color"
+          defaultValue={getRandomColour()}
+          id="colour-picker"
+          ref={colourRef}
+        ></input>
       </div>
       <div></div>
       <div>

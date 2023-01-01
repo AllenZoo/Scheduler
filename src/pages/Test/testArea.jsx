@@ -1,9 +1,10 @@
+import TimeTableForm from "../../components/timetable/timeTableForm";
 import TouchTable from "../../components/touchtable/touchTable";
 
 function TestArea() {
   return (
     <div>
-      <TouchTable></TouchTable>
+      <TimeTableForm></TimeTableForm>
     </div>
   );
 }
