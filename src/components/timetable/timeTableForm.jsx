@@ -69,6 +69,7 @@ function TimeTableForm(props) {
       descRef.current.value,
       colourRef.current.value
     );
+    colourRef.current.value = getRandomColour();
   };
 
   return (
