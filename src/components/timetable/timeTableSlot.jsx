@@ -12,6 +12,7 @@ const TouchButton = styled.button`
   justify-content: center;
   flex: 1;
 `;
+
 function TimeTableSlot(props) {
   const [slotData, setSlotData] = useState(props.slot);
   const [isSelected, setIsSelected] = useState(false);

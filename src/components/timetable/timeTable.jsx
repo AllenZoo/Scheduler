@@ -48,11 +48,21 @@ const TTFormRow = styled.div`
   column-gap: 10px;
 `;
 
+//create your forceUpdate hook
+function useForceUpdate() {
+  const [value, setValue] = useState(0); // integer state
+  return () => setValue((value) => value + 1); // update state to force render
+  // An function that increment 👆🏻 the previous state like here
+  // is better than directly setting `value + 1`
+}
+
 export const timeContext = createContext(null);
 function TimeTable(props) {
   const [interactable, setInteractable] = useState(props.interactable);
   const [schedule, setSchedule] = useState(props.schedule);
   const { addToPlanTemplate } = useContext(AppContext);
+
+  const forceUpdate = useForceUpdate();
   //const { removeFromPlanTemplate } = useContext(AppContext);
 
   // array of : {date: "mon/tue/wed/thu/fri/sat/sun", time: 8:00AM-11:30PM}
@@ -98,25 +108,26 @@ function TimeTable(props) {
   }
 
   function modifySlots(data) {
-    console.log(schedule);
-    console.log(props.schedule);
     selected_slots.forEach((slot) => {
       let index = props.schedule.findIndex((day) => {
         return day.date === slot.date;
       });
 
       let timeSlot = props.schedule[index].plan.get(slot.time);
-      console.log(timeSlot);
-
-      // let timeIndex = props.schedule[index].plan.findIndex((time) => {
-      //   return time.time === slot.time;
-      // });
+      //console.log(timeSlot);
 
       props.schedule[index].plan.get(slot.time).name = data.name;
-      //schedule[index].plan[timeIndex].desc = data.desc;
-      //props.schedule[index].plan[timeIndex].colour = data.colour;
-      //rerender();
+      props.schedule[index].plan.get(slot.time).desc = data.desc;
+      props.schedule[index].plan.get(slot.time).colour = data.colour;
+
+      // clear selected slots (force updates)
     });
+    ClearSelectedSlots();
+  }
+
+  function ClearSelectedSlots() {
+    selected_slots.splice(0, selected_slots.length);
+    forceUpdate();
   }
 
   function handleSubmit(name, desc, colour) {
