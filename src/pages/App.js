@@ -231,11 +231,10 @@ function App() {
     setTemplate(newTemplate);
     //setState({ template });
   };
-
   const handleClearTemplate = () => {
+    console.log("clearing template");
     let newTemplate = [...template];
     newTemplate.map((date) => (date.plan = generateEmptyPlan()));
-    //setState({ template });
     setTemplate(newTemplate);
   };
 
@@ -245,7 +244,6 @@ function App() {
     //setState({ commitments });
     setCommitments(newCommitments);
   };
-
   const addCommitment = (commitment) => {
     let newCommitments = [...commitments];
     newCommitments.push(commitment);
@@ -266,7 +264,6 @@ function App() {
 
     setCommitments(newCommitments);
   };
-
   const reassignCommitments = () => {
     let newDaily_coms = [...daily_coms];
     let newWeekly_coms = [...weekly_coms];
@@ -282,6 +279,11 @@ function App() {
 
     setDaily_coms(newDaily_coms);
     setWeekly_coms(newWeekly_coms);
+  };
+  const clearCommitments = () => {
+    setDaily_coms([]);
+    setWeekly_coms([]);
+    setCommitments([]);
   };
 
   const addChecklistTask = (task) => {
@@ -347,7 +349,7 @@ function App() {
       //console.log(dailyList);
       let eBlocks = getEmptyTimeBlocks(plan);
       let list = [...dailyList];
-      console.log(list);
+      //console.log(list);
 
       eBlocks.forEach(function (block) {
         let popped = list.pop();
@@ -367,7 +369,7 @@ function App() {
       Array.from(plan).forEach(function (block) {
         //console.log(block[1]);
         if (block[1].name == "") {
-          console.log("adding block");
+          //console.log("adding block");
           eBlocks.push(block);
         }
       });
@@ -421,33 +423,6 @@ function App() {
       }
     });
     console.log(inputList);
-    // shuffle blocks to input
-    shuffle(inputList);
-    return inputList;
-  };
-
-  const getInputList = () => {
-    let inputList = [];
-    commitments.forEach(function (commitment) {
-      let blocks = commitment.hours * 2 + commitment.minutes / 30;
-
-      switch (commitment.timeType) {
-        case "daily":
-          blocks = blocks * 7;
-          break;
-        case "weekly":
-          blocks = blocks;
-          break;
-        case "bi-weekly":
-          blocks = Math.ceil(blocks / 2);
-          break;
-      }
-
-      for (let i = 0; i < blocks; i++) {
-        inputList.push(commitment.name);
-      }
-    });
-
     // shuffle blocks to input
     shuffle(inputList);
     return inputList;
@@ -705,6 +680,8 @@ function App() {
         setCompletedTasks,
         generateEmptyPlan,
         addToPlanTemplate,
+        clearCommitments,
+        handleClearTemplate,
       }}
     >
       <div className="App">

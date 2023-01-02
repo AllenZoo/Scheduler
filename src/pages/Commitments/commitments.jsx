@@ -1,8 +1,13 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import CommitmentForm from "./components/commitmentForm";
 import Commitment from "./components/commitment";
 import "../../css/commitment.css";
 import styled from "styled-components";
+import {
+  StyledBottomLeftDiv,
+  StyledRemoveButton,
+} from "../../components/styled/my-styled-cool-stuff";
+import { AppContext } from "../App";
 
 const CommitmentPageContainer = styled.div`
   position: relative;
@@ -15,6 +20,8 @@ const CommitmentContainer = styled.div`
   position: relative;
   flex-direction: row;
   column-gap: 20px;
+  row-gap: 20px;
+  flex-wrap: wrap;
 `;
 
 const CommitmentPageBackground = styled.div`
@@ -39,6 +46,8 @@ const CommitmentPageBackground = styled.div`
 `;
 
 function Commitments(props) {
+  const { clearCommitments } = useContext(AppContext);
+
   function handleFormSubmit(commitment) {
     commitment.id = new Date().getTime();
     commitment.key = commitment.id;
@@ -63,7 +72,14 @@ function Commitments(props) {
           commitments={props.commitments}
           handleFormSubmit={handleFormSubmit}
         ></CommitmentForm>
+
+        <StyledBottomLeftDiv>
+          <StyledRemoveButton onClick={clearCommitments}>
+            Clear
+          </StyledRemoveButton>
+        </StyledBottomLeftDiv>
       </CommitmentPageContainer>
+
       <CommitmentPageBackground />
     </div>
   );

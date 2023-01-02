@@ -12,6 +12,10 @@ import styled from "styled-components";
 import TemplateForm from "../../pages/Template/components/templateForm";
 import { useContext } from "react";
 import { AppContext } from "../../pages/App";
+import {
+  StyledBottomLeftDiv,
+  StyledRemoveButton,
+} from "../../components/styled/my-styled-cool-stuff";
 
 const TimeTableContainer = styled.div`
   position: relative;
@@ -61,6 +65,7 @@ function TimeTable(props) {
   const [interactable, setInteractable] = useState(props.interactable);
   const [schedule, setSchedule] = useState(props.schedule);
   const { addToPlanTemplate } = useContext(AppContext);
+  const { handleClearTemplate } = useContext(AppContext);
 
   const forceUpdate = useForceUpdate();
   //const { removeFromPlanTemplate } = useContext(AppContext);
@@ -113,9 +118,6 @@ function TimeTable(props) {
         return day.date === slot.date;
       });
 
-      let timeSlot = props.schedule[index].plan.get(slot.time);
-      //console.log(timeSlot);
-
       props.schedule[index].plan.get(slot.time).name = data.name;
       props.schedule[index].plan.get(slot.time).desc = data.desc;
       props.schedule[index].plan.get(slot.time).colour = data.colour;
@@ -124,6 +126,22 @@ function TimeTable(props) {
     ClearSelectedSlots();
   }
 
+  // clears selected slots data
+  function clearDataFromSlots() {
+    selected_slots.forEach((slot) => {
+      let index = props.schedule.findIndex((day) => {
+        return day.date === slot.date;
+      });
+
+      props.schedule[index].plan.get(slot.time).name = "";
+      props.schedule[index].plan.get(slot.time).desc = "";
+      props.schedule[index].plan.get(slot.time).colour = "";
+    });
+    // clear selected slots (force updates)
+    ClearSelectedSlots();
+  }
+
+  // clears selected slots
   function ClearSelectedSlots() {
     selected_slots.splice(0, selected_slots.length);
     forceUpdate();
@@ -168,6 +186,14 @@ function TimeTable(props) {
             ></TemplateForm>
           </TTFormRow>
         </TimeTableContainer>
+        <StyledBottomLeftDiv>
+          <StyledRemoveButton onClick={handleClearTemplate}>
+            Clear
+          </StyledRemoveButton>
+          <StyledRemoveButton onClick={clearDataFromSlots}>
+            Clear Selected
+          </StyledRemoveButton>
+        </StyledBottomLeftDiv>
       </timeContext.Provider>
     );
   }

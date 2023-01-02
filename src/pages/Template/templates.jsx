@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import { useRef } from "react";
+
 import TimeTable from "../../components/timetable/timeTable";
 import "../../css/template.css";
-import TemplateForm from "./components/templateForm";
+import { AppContext } from "../App";
 
 function Templates(props) {
   const times = props.times;

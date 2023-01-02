@@ -38,8 +38,9 @@ input::-webkit-inner-spin-button {
 
 .page-title {
   font-size: 50px;
-  z-index: 200;
+  z-index: 500;
   align-self: flex-start;
+  position: relative;
 }
 
 body {
