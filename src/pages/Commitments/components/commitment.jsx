@@ -43,9 +43,24 @@ function Commitment(props) {
 
   const { commitment } = props;
 
+  function getTextColour() {
+    let r = parseInt(commitment.colour.substring(1, 3), 16);
+    let g = parseInt(commitment.colour.substring(3, 5), 16);
+    let b = parseInt(commitment.colour.substring(5, 7), 16);
+    let brightness = (r * 299 + g * 587 + b * 114) / 1000;
+
+    if (brightness < 125) {
+      return "white";
+    } else {
+      return "black";
+    }
+  }
+
   return (
     <CommitmentDisplayContainer>
-      <CommitmentDisplay style={{ backgroundColor: commitment.colour }}>
+      <CommitmentDisplay
+        style={{ backgroundColor: commitment.colour, color: getTextColour() }}
+      >
         <div>
           <strong>{commitment.name}</strong>
         </div>

@@ -119,9 +119,8 @@ function TimeTable(props) {
       props.schedule[index].plan.get(slot.time).name = data.name;
       props.schedule[index].plan.get(slot.time).desc = data.desc;
       props.schedule[index].plan.get(slot.time).colour = data.colour;
-
-      // clear selected slots (force updates)
     });
+    // clear selected slots (force updates)
     ClearSelectedSlots();
   }
 

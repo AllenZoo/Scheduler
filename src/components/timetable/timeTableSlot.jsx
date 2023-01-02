@@ -71,6 +71,19 @@ function TimeTableSlot(props) {
     setIsSelected(!isSelected, toggleSelectedSlot(slot));
   }
 
+  function getTextColour() {
+    let r = parseInt(props.slot.colour.substring(1, 3), 16);
+    let g = parseInt(props.slot.colour.substring(3, 5), 16);
+    let b = parseInt(props.slot.colour.substring(5, 7), 16);
+    let brightness = (r * 299 + g * 587 + b * 114) / 1000;
+
+    if (brightness < 125) {
+      return "white";
+    } else {
+      return "black";
+    }
+  }
+
   // empty time table slot
   if (props.slot.name == "") {
     return (
@@ -92,7 +105,7 @@ function TimeTableSlot(props) {
       <TouchButton isSelected={isSelected} onClick={toggleSelection}>
         <TTSlot
           isSelected={isSelected}
-          style={{ backgroundColor: props.slot.colour }}
+          style={{ backgroundColor: props.slot.colour, color: getTextColour() }}
         >
           <TTSlotText>{props.slot.name}</TTSlotText>
         </TTSlot>
