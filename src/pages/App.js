@@ -587,7 +587,7 @@ function App() {
     ];
 
     console.log(newSchedule);
-    newSchedule.map((date) => (date.plan = generateTestPlan()));
+    newSchedule.map((date) => (date.plan = generateEmptyPlan()));
     // .then(() => {
     //   setSchedule(newSchedule);
     // });
@@ -653,8 +653,8 @@ function App() {
       colour: "green",
     };
 
-    addCommitment(com1);
-    addCommitment(com2);
+    //addCommitment(com1);
+    //addCommitment(com2);
   }
   // Run once to initialize schedule
   useEffect(() => {
