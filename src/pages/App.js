@@ -475,7 +475,7 @@ function App() {
     });
   };
 
-  const saveDataLocal = (user) => {
+  const saveDataLocal = () => {
     console.log("saving to local storage");
     const jsonCommitments = JSON.stringify(commitments);
     const jsonTasks = JSON.stringify(tasks);
@@ -490,8 +490,27 @@ function App() {
     localStorage.setItem("template", jsonTemplate);
   };
 
-  const loadDataLocal = (user) => {
+  const loadDataLocal = () => {
     console.log("loading from local storage");
+
+    let loadedCommitments = JSON.parse(localStorage.getItem("commitments"));
+    let loadedTasks = JSON.parse(localStorage.getItem("tasks"));
+    let loadedCTasks = JSON.parse(localStorage.getItem("completed_tasks"));
+    let loadedSchedule = JSON.parse(localStorage.getItem("schedule"), reviver);
+    let loadedTemplate = JSON.parse(localStorage.getItem("template"), reviver);
+
+    // check if any of the loaded data is null and if so, return
+    if (
+      loadedCommitments == null ||
+      loadedTasks == null ||
+      loadedCTasks == null ||
+      loadedSchedule == null ||
+      loadedTemplate == null
+    ) {
+      alert("No data found in local storage");
+      return;
+    }
+
     setCommitments(JSON.parse(localStorage.getItem("commitments")));
     setTasks(JSON.parse(localStorage.getItem("tasks")));
     setCompletedTasks(JSON.parse(localStorage.getItem("completed_tasks")));

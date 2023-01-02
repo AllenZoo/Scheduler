@@ -18,7 +18,6 @@ const DataPageContainer = styled.div`
   width: 100%;
   row-gap: 20px;
 `;
-
 const DBOptionContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -52,11 +51,11 @@ function Data(props) {
   }
 
   function handleSaveLocal() {
-    props.handleSaveLocal(userRef.current.value);
+    props.handleSaveLocal();
   }
 
   function handleLoadLocal() {
-    props.handleLoadLocal(userRef.current.value);
+    props.handleLoadLocal();
   }
 
   return (
