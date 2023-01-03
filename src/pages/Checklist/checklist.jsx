@@ -2,6 +2,14 @@ import React from "react";
 import ChecklistDisplay from "./components/checklistDisplay";
 import ChecklistForm from "./components/checklistForm";
 import "../../css/checklist.css";
+import styled from "styled-components";
+
+const ChecklistPageContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 200;
+`;
 
 function Checklist(props) {
   const commitments = props.commitments;
