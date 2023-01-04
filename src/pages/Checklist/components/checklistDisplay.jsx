@@ -1,5 +1,13 @@
 import React, { Component } from "react";
 import ChecklistItem from "./checklistItem";
+import styled from "styled-components";
+
+const ChecklistDisplayContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 200;
+`;
 
 function ChecklistDisplay(props) {
   function toggleState(taskId, taskState) {
