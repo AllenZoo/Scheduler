@@ -1,10 +1,9 @@
-import TimeTableForm from "../../components/timetable/timeTableForm";
-import TouchTable from "../../components/touchtable/touchTable";
+import ChecklistList from "../Checklist/components/checklistList";
 
 function TestArea() {
   return (
     <div>
-      <TimeTableForm></TimeTableForm>
+      <ChecklistList></ChecklistList>
     </div>
   );
 }

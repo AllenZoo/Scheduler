@@ -99,3 +99,65 @@ export const StyledTitleH2 = styled.h2`
   text-align: center;
   color: black;
 `;
+
+export const StyledFlexColumnDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 10px;
+`;
+
+export const StyledFlexRowDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  column-gap: 10px;
+`;
+
+export const StyledBlueCheckbox = styled.input.attrs({ type: "checkbox" })`
+  /* style the checkbox itself */
+  width: 20px;
+  height: 20px;
+  border: 2px solid blue;
+  border-radius: 4px;
+  background-color: white;
+  appearance: none; /* remove default styles */
+
+  /* style the checkmark */
+  &:before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: blue;
+    border-radius: 4px;
+  }
+
+  /* style the checked state */
+  &:checked {
+    border-color: orange;
+    &:before {
+      display: block;
+      background-color: orange;
+      border-color: orange;
+    }
+  }
+
+  /* hover state */
+  &:hover {
+    border-color: purple;
+    &:before {
+      background-color: purple;
+    }
+  }
+
+  /* active state */
+  &:active {
+    border-color: red;
+    &:before {
+      background-color: red;
+    }
+  }
+`;

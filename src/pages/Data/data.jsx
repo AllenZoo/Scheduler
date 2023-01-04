@@ -79,7 +79,7 @@ function Data(props) {
               style={{ width: "130px" }}
               onClick={handleLoadDB}
             >
-              Load to Database
+              Load from Database
             </StyledPurpleButton>
           </StyledRowDiv>
         </DBOptionContainer>
