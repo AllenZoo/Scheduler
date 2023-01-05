@@ -8,6 +8,12 @@ import {
 
 const StyledChecklistItem = styled(StyledFlexRowDiv)`
   column-gap: 10px;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  flex-wrap: wrap;
+  padding: 10px 20px 10px 20px;
+  width: 90%;
+  justify-content: space-between;
 `;
 
 function ChecklistItem(props) {
@@ -16,7 +22,8 @@ function ChecklistItem(props) {
 
   return (
     <StyledChecklistItem>
-      <StyledBlueCheckbox></StyledBlueCheckbox>
+      <div>task: do some homework :)</div>
+      <StyledBlueCheckbox />
     </StyledChecklistItem>
   );
 }

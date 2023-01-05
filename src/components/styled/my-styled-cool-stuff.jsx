@@ -131,7 +131,7 @@ export const StyledBlueCheckbox = styled.input.attrs({ type: "checkbox" })`
     display: block;
     width: 20px;
     height: 20px;
-    background-color: blue;
+    // background-color: blue;
     border-radius: 4px;
   }
 
@@ -148,6 +148,7 @@ export const StyledBlueCheckbox = styled.input.attrs({ type: "checkbox" })`
   /* hover state */
   &:hover {
     border-color: purple;
+    cursor: pointer;
     &:before {
       background-color: purple;
     }
