@@ -16,6 +16,10 @@ function ChecklistList(props) {
   const [title, setTitle] = useState("");
   const [tasks, setTasks] = useState([]);
 
+  function addTask(task) {
+    setTasks([...tasks, task]);
+  }
+
   return (
     <div>
       <StyledChecklistContainer>
