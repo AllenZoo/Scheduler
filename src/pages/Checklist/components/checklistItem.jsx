@@ -17,7 +17,6 @@ const StyledChecklistItem = styled(StyledFlexRowDiv)`
   width: 90%;
   justify-content: space-between;
 `;
-
 const StyledChecklistTask = styled.input.attrs({ type: "text" })`
   flex: 1;
   border: none;
@@ -47,7 +46,6 @@ const StyledChecklistTask = styled.input.attrs({ type: "text" })`
     outline: none;
   }
 `;
-
 const ChecklistTextareaStyle = {
   display: "block",
   overflow: "hidden",
@@ -58,7 +56,11 @@ const ChecklistTextareaStyle = {
   borderRadius: "10px",
   paddingLeft: "10px",
   paddingTop: "5px",
-  border: "1px solid gray",
+  boxShadow: "0 0 5px 0 rgba(0, 0, 0, 0.5)",
+  ":hover": {
+    boxShadow: "0 0 5px 0 rgba(0, 0, 0, 0.75)",
+  },
+  border: "none",
   ":hover": {
     border: "1px solid black",
   },
@@ -71,8 +73,6 @@ function ChecklistItem(props) {
   function handleCheckboxClick(e) {
     setChecked(e.target.checked);
   }
-
-  useEffect(() => {}, [task]);
 
   return (
     <StyledChecklistItem>

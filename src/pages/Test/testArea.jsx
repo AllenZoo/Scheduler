@@ -26,7 +26,6 @@ function TestArea() {
   return (
     <div>
       <ChecklistList></ChecklistList>
-      <TextArea></TextArea>
     </div>
   );
 }

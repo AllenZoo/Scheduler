@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+
 const defaultStyle = {
   display: "block",
   overflow: "hidden",
