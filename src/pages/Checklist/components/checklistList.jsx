@@ -3,6 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import add from "../../../icons/add.png";
 import chevronDown from "../../../icons/chevron-down-solid.svg";
+import chevronUp from "../../../icons/chevron-up-solid.svg";
 import uniqid from "uniqid";
 
 import {
@@ -27,7 +28,7 @@ const StyledCheckListButton = styled(StyledWhiteButton)`
   padding: 10px;
 `;
 
-const StyledIconImage = styled.img`
+const StyledIconImageCL = styled.img`
   width: 20px;
   height: 20px;
   margin: 0px;
@@ -37,63 +38,85 @@ const StyledIconImage = styled.img`
 
 function ChecklistList(props) {
   const [commitment, setCommitment] = useState(props.commitment);
+  const [showTasks, setShowTasks] = useState(true);
   const [title, setTitle] = useState("defaultTitle");
   const [tasks, setTasks] = useState([]);
 
   function addTask(task) {
+    setShowTasks(true);
     setTasks([...tasks, task]);
   }
 
   function addEmptyTask() {
+    console.log("addEmptyTask");
     let newTask = {
       id: uniqid(),
       task: "",
       completed: false,
       description: "",
     };
+    //setTasks([...tasks, newTask]);
     addTask(newTask);
   }
 
-  useEffect(() => {
-    let newTasks = [];
+  function toggleShowTasks() {
+    setShowTasks(!showTasks);
+  }
 
-    let task1 = {
-      id: 1,
-      task: "task1",
-      completed: false,
-      description: "description1",
-    };
-    let task2 = {
-      id: 2,
-      task: "task2",
-      completed: false,
-      description: "description2",
-    };
-
-    newTasks.push(task1);
-    newTasks.push(task2);
-    newTasks.push(task2);
-
+  function onDeleteTask(taskId) {
+    console.log("onDeleteTask", taskId);
+    let newTasks = tasks.filter((task) => task.id !== taskId);
     setTasks(newTasks);
-    console.log("tasks", tasks);
-  }, []);
+  }
+
+  // useEffect(() => {
+  //   // let task1 = {
+  //   //   id: 1,
+  //   //   task: "task1",
+  //   //   completed: false,
+  //   //   description: "description1",
+  //   // };
+  //   // let task2 = {
+  //   //   id: 2,
+  //   //   task: "task2",
+  //   //   completed: false,
+  //   //   description: "description2",
+  //   // };
+  //   // addTask(task1);
+  //   // addTask(task2);
+  // }, []);
+
+  // useEffect(() => {
+  //   //console.log("tasks", tasks);
+  // }, [tasks]);
 
   return (
     <div>
       <StyledChecklistContainer>
         <StyledTitleH2>{title}</StyledTitleH2>
         <StyledFlexRowDiv>
-          <StyledCheckListButton>
-            <StyledIconImage src={add} onClick={addEmptyTask} />
+          <StyledCheckListButton onClick={addEmptyTask}>
+            <StyledIconImageCL src={add} />
           </StyledCheckListButton>
-          <StyledCheckListButton>
-            <StyledIconImage src={chevronDown} />
+          <StyledCheckListButton onClick={toggleShowTasks}>
+            {showTasks ? (
+              <StyledIconImageCL src={chevronDown} />
+            ) : (
+              <StyledIconImageCL src={chevronUp} />
+            )}
           </StyledCheckListButton>
         </StyledFlexRowDiv>
 
-        {tasks.map((task) => {
-          return <ChecklistItem task={task} key={uniqid()}></ChecklistItem>;
-        })}
+        {showTasks &&
+          tasks.map((task) => {
+            return (
+              <ChecklistItem
+                task={task}
+                key={uniqid()}
+                onDeleteTask={onDeleteTask}
+              ></ChecklistItem>
+            );
+          })}
       </StyledChecklistContainer>
     </div>
   );

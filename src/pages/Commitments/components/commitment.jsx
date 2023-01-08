@@ -21,7 +21,7 @@ const CommitmentDisplay = styled.div`
     font-size: 30px;
   }
 `;
-const CommitmentDeleteButton = styled.button`
+export const CommitmentDeleteButton = styled.button`
   position: absolute;
   right: 0px;
   top: 0px;

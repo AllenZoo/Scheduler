@@ -186,3 +186,32 @@ export const StyledWhiteButton = styled.button`
     border-color: gray; /* active border color */
   }
 `;
+
+export const StyledRedButton = styled.button`
+  /* style the button itself */
+  color: black; /* text color */
+  background-color: #fc0404; /* background color */
+  border-radius: 4px;
+  padding: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+
+  /* hover state */
+  &:hover {
+    background-color: #dc0404;
+  }
+
+  /* active state */
+  &:active {
+    background-color: #b30404;
+  }
+`;
+
+export const StyledIconImage = styled.img`
+  width: 20px;
+  height: 20px;
+  margin: 0px;
+  padding: 0px;
+  cursor: pointer;
+`;
