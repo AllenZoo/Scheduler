@@ -76,7 +76,10 @@ function ChecklistItem(props) {
 
   return (
     <StyledChecklistItem>
-      <AutoHeightTextarea style={ChecklistTextareaStyle}></AutoHeightTextarea>
+      <AutoHeightTextarea
+        style={ChecklistTextareaStyle}
+        placeholder="new task"
+      ></AutoHeightTextarea>
       <StyledBlueCheckbox onClick={handleCheckboxClick} />
     </StyledChecklistItem>
   );

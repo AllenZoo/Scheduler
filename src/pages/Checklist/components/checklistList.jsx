@@ -1,9 +1,15 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import styled from "styled-components";
+import add from "../../../icons/add.png";
+import chevronDown from "../../../icons/chevron-down-solid.svg";
+import uniqid from "uniqid";
+
 import {
   StyledFlexColumnDiv,
+  StyledFlexRowDiv,
   StyledTitleH2,
+  StyledWhiteButton,
 } from "../../../components/styled/my-styled-cool-stuff";
 import ChecklistItem from "./checklistItem";
 
@@ -14,6 +20,21 @@ const StyledChecklistContainer = styled(StyledFlexColumnDiv)`
   padding: 10px;
   padding-bottom: 20px;
 `;
+
+const StyledCheckListButton = styled(StyledWhiteButton)`
+  font-size: 1px;
+  margin: 0px;
+  padding: 10px;
+`;
+
+const StyledIconImage = styled.img`
+  width: 20px;
+  height: 20px;
+  margin: 0px;
+  padding: 0px;
+  cursor: pointer;
+`;
+
 function ChecklistList(props) {
   const [commitment, setCommitment] = useState(props.commitment);
   const [title, setTitle] = useState("defaultTitle");
@@ -21,6 +42,16 @@ function ChecklistList(props) {
 
   function addTask(task) {
     setTasks([...tasks, task]);
+  }
+
+  function addEmptyTask() {
+    let newTask = {
+      id: uniqid(),
+      task: "",
+      completed: false,
+      description: "",
+    };
+    addTask(newTask);
   }
 
   useEffect(() => {
@@ -51,9 +82,17 @@ function ChecklistList(props) {
     <div>
       <StyledChecklistContainer>
         <StyledTitleH2>{title}</StyledTitleH2>
+        <StyledFlexRowDiv>
+          <StyledCheckListButton>
+            <StyledIconImage src={add} onClick={addEmptyTask} />
+          </StyledCheckListButton>
+          <StyledCheckListButton>
+            <StyledIconImage src={chevronDown} />
+          </StyledCheckListButton>
+        </StyledFlexRowDiv>
 
         {tasks.map((task) => {
-          return <ChecklistItem task={task}></ChecklistItem>;
+          return <ChecklistItem task={task} key={uniqid()}></ChecklistItem>;
         })}
       </StyledChecklistContainer>
     </div>

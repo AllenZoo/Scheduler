@@ -162,3 +162,27 @@ export const StyledBlueCheckbox = styled.input.attrs({ type: "checkbox" })`
     }
   }
 `;
+
+export const StyledWhiteButton = styled.button`
+  /* style the button itself */
+  color: black; /* text color */
+  background-color: white; /* background color */
+  border: 2px solid white; /* border color */
+  border-radius: 4px;
+  padding: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+
+  /* hover state */
+  &:hover {
+    background-color: lightgray; /* hover background color */
+    border-color: lightgray; /* hover border color */
+  }
+
+  /* active state */
+  &:active {
+    background-color: gray; /* active background color */
+    border-color: gray; /* active border color */
+  }
+`;
