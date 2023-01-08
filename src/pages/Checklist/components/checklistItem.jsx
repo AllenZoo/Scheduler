@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "../../../css/checklist.css";
 import styled from "styled-components";
 import {
@@ -82,6 +82,7 @@ const StyledChecklistDeleteButton = styled(CommitmentDeleteButton)`
 function ChecklistItem(props) {
   const [checked, setChecked] = useState(false);
   const [task, setTask] = useState(props.task);
+  const textRef = useRef(null);
 
   function handleCheckboxClick(e) {
     setChecked(e.target.checked);
@@ -91,11 +92,17 @@ function ChecklistItem(props) {
     props.onDeleteTask(task.id);
   }
 
+  function handleTaskChange(e) {
+    props.task["task"] = e;
+  }
+
   return (
     <StyledChecklistItem>
       <AutoHeightTextarea
         style={ChecklistTextareaStyle}
         placeholder="new task"
+        setTextAreaValue={handleTaskChange}
+        initValue={task.task}
       ></AutoHeightTextarea>
       <StyledChecklistDeleteButton onClick={handleDeleteClick}>
         <StyledIconImage src={xMark} />

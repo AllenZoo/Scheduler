@@ -8,9 +8,14 @@ const defaultStyle = {
   backgroundColor: "white",
 };
 
-const AutoHeightTextarea = ({ style = defaultStyle, ...etc }) => {
+const AutoHeightTextarea = ({
+  style = defaultStyle,
+  setTextAreaValue = {},
+  initValue = "",
+  ...etc
+}) => {
   const textareaRef = useRef(null);
-  const [currentValue, setCurrentValue] = useState(""); // you can manage data with it
+  const [currentValue, setCurrentValue] = useState(initValue); // you can manage data with it
 
   useEffect(() => {
     textareaRef.current.style.height = "0px";
@@ -27,6 +32,7 @@ const AutoHeightTextarea = ({ style = defaultStyle, ...etc }) => {
       onChange={(e) => {
         setCurrentValue(e.target.value);
         //to do something with value, maybe callback?
+        setTextAreaValue(e.target.value);
       }}
     />
   );

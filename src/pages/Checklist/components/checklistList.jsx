@@ -13,6 +13,7 @@ import {
   StyledWhiteButton,
 } from "../../../components/styled/my-styled-cool-stuff";
 import ChecklistItem from "./checklistItem";
+import { useRef } from "react";
 
 const StyledChecklistContainer = styled(StyledFlexColumnDiv)`
   row-gap: 10px;
@@ -48,7 +49,7 @@ function ChecklistList(props) {
   }
 
   function addEmptyTask() {
-    console.log("addEmptyTask");
+    //console.log("addEmptyTask");
     let newTask = {
       id: uniqid(),
       task: "",
@@ -86,9 +87,9 @@ function ChecklistList(props) {
   //   // addTask(task2);
   // }, []);
 
-  // useEffect(() => {
-  //   //console.log("tasks", tasks);
-  // }, [tasks]);
+  useEffect(() => {
+    console.log("tasks", tasks);
+  }, [tasks]);
 
   return (
     <div>
