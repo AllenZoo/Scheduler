@@ -3,6 +3,10 @@ import ChecklistDisplay from "./components/checklistDisplay";
 import ChecklistForm from "./components/checklistForm";
 import "../../css/checklist.css";
 import styled from "styled-components";
+import { useContext } from "react";
+import { AppContext } from "../App";
+import ChecklistList from "./components/checklistList";
+import { uniqueId } from "lodash";
 
 const ChecklistPageContainer = styled.div`
   position: relative;
@@ -12,7 +16,7 @@ const ChecklistPageContainer = styled.div`
 `;
 
 function Checklist(props) {
-  const commitments = props.commitments;
+  const { commitments } = useContext(AppContext);
   //tasks = this.props.tasks; //<- doesn't update along with this.props.tasks
 
   const toggleTask = (taskId, taskState) => {
@@ -30,17 +34,10 @@ function Checklist(props) {
     <div>
       <div className="checklist-container">
         <div className="page-title">Todo-List</div>
-        <ChecklistForm
-          commitments={commitments}
-          addChecklistTask={addTaskToList}
-        ></ChecklistForm>
-        <ChecklistDisplay
-          tasks={props.tasks}
-          completedTasks={props.completedTasks}
-          toggleTask={toggleTask}
-        ></ChecklistDisplay>
+        {commitments.map((c) => (
+          <ChecklistList commitment={c} key={uniqueId()}></ChecklistList>
+        ))}
       </div>
-
       <div className="checklist-page-background"></div>
     </div>
   );
