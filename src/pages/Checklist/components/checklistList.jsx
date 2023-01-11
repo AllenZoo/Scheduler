@@ -38,9 +38,9 @@ const StyledIconImageCL = styled.img`
 `;
 
 function ChecklistList(props) {
-  const [commitment, setCommitment] = useState(props.commitment);
+  const [commitment, setCommitment] = useState();
   const [showTasks, setShowTasks] = useState(true);
-  const [title, setTitle] = useState(props.title);
+  const [title, setTitle] = useState(props.commitment.name);
   const [tasks, setTasks] = useState([]);
 
   function addTask(task) {
@@ -85,6 +85,7 @@ function ChecklistList(props) {
     // };
     // addTask(task1);
     // addTask(task2);
+    console.log("commitment", props.commitment);
   }, []);
 
   useEffect(() => {
