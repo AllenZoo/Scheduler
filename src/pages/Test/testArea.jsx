@@ -25,7 +25,7 @@ export const TextArea = styled.textarea`
 function TestArea() {
   return (
     <div>
-      <ChecklistList></ChecklistList>
+      <ChecklistList title="Cool Checklist"></ChecklistList>
     </div>
   );
 }
