@@ -1,13 +1,16 @@
 {
   "files": {
     "main.css": "/Scheduler/static/css/main.68efd25d.css",
-    "main.js": "/Scheduler/static/js/main.a6c57648.js",
+    "main.js": "/Scheduler/static/js/main.017a090d.js",
     "index.html": "/Scheduler/index.html",
+    "static/media/xmark-solid.svg": "/Scheduler/static/media/xmark-solid.60cf68c83c1745a9a5a3497035f6101d.svg",
+    "static/media/chevron-up-solid.svg": "/Scheduler/static/media/chevron-up-solid.ea4ffe97ec27ad11c5a80c5430918718.svg",
+    "static/media/chevron-down-solid.svg": "/Scheduler/static/media/chevron-down-solid.bba296b719107cbbdd4bcf4a7aec4e0c.svg",
     "main.68efd25d.css.map": "/Scheduler/static/css/main.68efd25d.css.map",
-    "main.a6c57648.js.map": "/Scheduler/static/js/main.a6c57648.js.map"
+    "main.017a090d.js.map": "/Scheduler/static/js/main.017a090d.js.map"
   },
   "entrypoints": [
     "static/css/main.68efd25d.css",
-    "static/js/main.a6c57648.js"
+    "static/js/main.017a090d.js"
   ]
 }
