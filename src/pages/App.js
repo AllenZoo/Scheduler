@@ -613,7 +613,15 @@ function App() {
         <Router>
           <Navbar></Navbar>
           <Routes>
-            <Route path="/" element={Home} />
+            <Route
+              path="/"
+              element={
+                <WeeklyOutlook
+                  schedule={schedule}
+                  generateSchedule={generateSchedule}
+                ></WeeklyOutlook>
+              }
+            />
             <Route
               path="/weeklyoutlook"
               element={
