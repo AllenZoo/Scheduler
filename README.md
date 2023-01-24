@@ -2,7 +2,7 @@
 
 A SPA targetting those who want a little switch up to their monotonous schedules by letting RNG decide their fate for the day.
 
-- Live Site URL: [Scheduler](https://allenzoo.github.io/Scheduler/)
+Live Site URL: [Scheduler](https://allenzoo.github.io/Scheduler/)
 
 
 
