@@ -2,7 +2,7 @@
 
 A SPA targetting those who want a little switch up to their monotonous schedules by letting RNG decide their fate for the day.
 
-
+- Live Site URL: [Scheduler](https://allenzoo.github.io/Scheduler/)
 
 
 
@@ -10,6 +10,7 @@ A SPA targetting those who want a little switch up to their monotonous schedules
 
 - [Overview](#overview)
   - [Functionality](#functionality)
+  - [How to Use](#how-to-use)
   - [Screenshot](#screenshots)
   - [Links](#links)
 - [My process](#my-process)
@@ -31,6 +32,8 @@ Functionalities include:
 * Time commitment lists used for generating schedules.
 * Checklist to keep track of tasks.
 * Saving and loading from a  local database.
+
+### How to use
 
 ### Screenshots
 
