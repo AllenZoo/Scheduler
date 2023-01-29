@@ -34,6 +34,16 @@ Functionalities include:
 
 ### How to use
 
+- Add your commitments! This is the most important step as most functionalities depend on what time commitments you have. 
+
+**Note: only commitments with time type "Daily" and "Weekly" work right now. The rest has yet to be implemented.**
+
+- Set up your template. Put down any appointments or routines that you don't want to have randomized in your schedule using the template. You can either manually input everything using text inputs or select time slots by clicking on them and modifying them that way. 
+
+- Press the magic "Generate Schedule" button located at the bottom of the "Weekly Outlook" page. This will generate for you a new randomized schedule! If you don't like what you get, no worries! Just press the button again and it will give you a brand new schedule.
+
+- To get a more condensed view of your day schedule, go on the "Day Plan" page.
+
 ### Preview
 
 ![alt text](https://github.com/AllenZoo/Scheduler/blob/master/screenshots/screenshot1.PNG)
@@ -69,8 +79,10 @@ Back-end: Node.js Express framework, MySQL database.
 
 ### Continued development
 
+- Working on save state for Checklist Page.
 - Currently working on implementing Goals page.
 - Working on improving algorithm for generating schedule.
+
 
 ### Useful resources
 
