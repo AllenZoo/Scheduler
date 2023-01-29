@@ -87,7 +87,7 @@ Back-end: Node.js Express framework, MySQL database.
 
 - A lot of stuff from Stack Overflow.
 
-## How to run Scheduler
+## How to run Scheduler with a DB backend
 Install the following (if you haven't already):
 - [Node js](https://nodejs.org/en/download/)
 - [mySQL server](https://dev.mysql.com/downloads/mysql/)
