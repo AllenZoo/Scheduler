@@ -5,13 +5,12 @@ A SPA targetting those who want a little switch up to their monotonous schedules
 Live Site URL: [Scheduler](https://allenzoo.github.io/Scheduler/)
 
 
-
 ## Table of contents
 
 - [Overview](#overview)
   - [Functionality](#functionality)
   - [How to Use](#how-to-use)
-  - [Screenshot](#screenshots)
+  - [Preview](#preview)
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
@@ -35,7 +34,7 @@ Functionalities include:
 
 ### How to use
 
-### Screenshots
+### Preview
 
 ![alt text](https://github.com/AllenZoo/Scheduler/blob/master/screenshots/screenshot1.PNG)
 ###
