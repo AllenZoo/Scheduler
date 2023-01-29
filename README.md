@@ -17,7 +17,7 @@ Live Site URL: [Scheduler](https://allenzoo.github.io/Scheduler/)
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
-- [Installation](#how-to-run-scheduler-with-db-backend)
+- [Installation](#how-to-run-scheduler-with-a-db-backend)
 - [Author](#author)
 
 ## Overview
