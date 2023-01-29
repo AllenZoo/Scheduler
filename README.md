@@ -34,8 +34,7 @@ Functionalities include:
 
 ### How to use
 
-- Add your commitments! This is the most important step as most functionalities depend on what time commitments you have. 
-
+- Add your commitments! This is the most important step as most functionalities depend on what time commitments you have. You can do this by navigating to the "Commitments" page on the navbar and filling out the form.
 **Note: only commitments with time type "Daily" and "Weekly" work right now. The rest has yet to be implemented.**
 
 - Set up your template. Put down any appointments or routines that you don't want to have randomized in your schedule using the template. You can either manually input everything using text inputs or select time slots by clicking on them and modifying them that way. 
