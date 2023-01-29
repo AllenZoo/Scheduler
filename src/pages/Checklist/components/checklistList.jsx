@@ -71,21 +71,7 @@ function ChecklistList(props) {
   }
 
   useEffect(() => {
-    // let task1 = {
-    //   id: 1,
-    //   task: "task1",
-    //   completed: false,
-    //   description: "description1",
-    // };
-    // let task2 = {
-    //   id: 2,
-    //   task: "task2",
-    //   completed: false,
-    //   description: "description2",
-    // };
-    // addTask(task1);
-    // addTask(task2);
-    console.log("commitment", props.commitment);
+    //console.log("commitment", props.commitment);
   }, []);
 
   useEffect(() => {
@@ -106,6 +92,9 @@ function ChecklistList(props) {
             ) : (
               <StyledIconImageCL src={chevronUp} />
             )}
+          </StyledCheckListButton>
+          <StyledCheckListButton>
+            <div>Hide Completed</div>
           </StyledCheckListButton>
         </StyledFlexRowDiv>
 
