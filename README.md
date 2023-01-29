@@ -17,7 +17,7 @@ Live Site URL: [Scheduler](https://allenzoo.github.io/Scheduler/)
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
-- [Installation](#how-to-run-scheduler)
+- [Installation](#how-to-run-scheduler-with-db-backend)
 - [Author](#author)
 
 ## Overview
@@ -142,6 +142,8 @@ const db = mysql.createConnection({
   database: "scheduler",
 });
 ```
+
+Or honestly, just use local storage instead :)
 
 ## Author
 
