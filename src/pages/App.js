@@ -695,7 +695,7 @@ function App() {
                 ></Data>
               }
             />
-            <Route path="/test" element={<TestArea />} />
+            {/* <Route path="/test" element={<TestArea />} /> */}
           </Routes>
         </Router>
       </div>
